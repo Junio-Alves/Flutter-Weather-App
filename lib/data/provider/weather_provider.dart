@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/foundation.dart';
-import 'package:weather_app2/data/constants.dart';
+import 'package:weather_app2/data/utils/constants.dart';
 import '../controller/position_controller.dart';
 import 'package:weather_app2/data/models/weather_model.dart';
 import "package:http/http.dart" as http;

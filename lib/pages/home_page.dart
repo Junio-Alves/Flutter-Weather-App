@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:weather_app2/data/models/weather_model.dart';
 import 'package:weather_app2/data/provider/weather_provider.dart';
-import 'package:weather_app2/pages/widgets/backgroundcolor.dart';
-import 'package:weather_app2/pages/widgets/imageIcon.dart';
+import 'package:weather_app2/data/provider/backgroundcolor.dart';
+import 'package:weather_app2/data/utils/imageIcon.dart';
 import 'package:provider/provider.dart';
+import 'package:weather_app2/pages/loading_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -17,9 +18,14 @@ class _HomePageState extends State<HomePage> {
   bool _isLoading = true;
   @override
   void initState() {
-    final provider = Provider.of<WeatherProvider>(context, listen: false);
-    provider.getWeather().then((value) {
+    final weatherProvider =
+        Provider.of<WeatherProvider>(context, listen: false);
+    final backgroundProvider =
+        Provider.of<BackgrounColorProvider>(context, listen: false);
+
+    weatherProvider.getWeather().then((value) {
       setState(() {
+        backgroundProvider.changeBackgroundColor(weatherProvider.weathers[0]);
         _isLoading = false;
       });
     });
@@ -29,9 +35,12 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     final provider = Provider.of<WeatherProvider>(context, listen: false);
+    final backgroundProvider =
+        Provider.of<BackgrounColorProvider>(context, listen: false);
     return Scaffold(
+      backgroundColor: backgroundProvider.backgroundColor,
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
+        backgroundColor: backgroundProvider.backgroundColor,
         actions: [
           IconButton(
             onPressed: () {},
@@ -42,25 +51,10 @@ class _HomePageState extends State<HomePage> {
         ],
       ),
       body: _isLoading
-          ? getLoadingUI()
+          ? const LoadingPage()
           : provider.error.isNotEmpty
               ? getErrorUI(provider.error)
               : getBodyUI(provider.weathers),
-    );
-  }
-
-  //Tela de carregamento
-  Widget getLoadingUI() {
-    return const Center(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          SpinKitCircle(
-            color: Colors.blue,
-            size: 50,
-          )
-        ],
-      ),
     );
   }
 

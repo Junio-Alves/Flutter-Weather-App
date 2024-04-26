@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:weather_app2/pages/home_page.dart';
 import 'package:weather_app2/pages/search_page.dart';
+import 'package:weather_app2/data/provider/backgroundcolor.dart';
 
 class TabScreen extends StatefulWidget {
   const TabScreen({super.key});
@@ -10,7 +12,7 @@ class TabScreen extends StatefulWidget {
 }
 
 class _TabScreenState extends State<TabScreen> {
-  int _paginaAtual = 0;
+  final _paginaAtual = 0;
   late PageController pc;
 
   @override
@@ -21,14 +23,16 @@ class _TabScreenState extends State<TabScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final backgroundProvider =
+        Provider.of<BackgrounColorProvider>(context, listen: true);
     return Scaffold(
+      backgroundColor: backgroundProvider.backgroundColor,
       body: PageView(
         children: const [HomePage(), SearchPage()],
       ),
       bottomNavigationBar: ClipRRect(
         borderRadius: BorderRadius.circular(30),
         child: BottomNavigationBar(
-          elevation: 30,
           iconSize: 40,
           backgroundColor: Colors.grey.withOpacity(0.3),
           currentIndex: _paginaAtual,
