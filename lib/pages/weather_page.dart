@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:weather_app2/data/models/weather_model.dart';
@@ -72,6 +73,7 @@ class _WeatherPageState extends State<WeatherPage> {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              //ICONE DO TEMPO ATUAL
               Image.asset(
                 imageIcon(weather.currently),
                 height: 200,
@@ -79,6 +81,7 @@ class _WeatherPageState extends State<WeatherPage> {
               )
             ],
           ),
+          //CARD COM A PREVISÃO DOS DIAS SEGUINTES
           Padding(
             padding: const EdgeInsets.all(30.0),
             child: Container(
@@ -135,6 +138,51 @@ class _WeatherPageState extends State<WeatherPage> {
                     );
                   }),
             ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(top: 50),
+            child: SizedBox(
+                height: 100,
+                child: Card(
+                  elevation: 9,
+                  color: Colors.grey.withOpacity(0.3),
+                  child: const Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      IconButton(
+                        onPressed: null,
+                        icon: Icon(
+                          Icons.home_outlined,
+                          color: Colors.white,
+                          size: 60,
+                        ),
+                      ),
+                      SizedBox(
+                        width: 40,
+                      ),
+                      IconButton(
+                        onPressed: null,
+                        icon: Icon(
+                          Icons.search,
+                          color: Colors.white,
+                          size: 60,
+                        ),
+                      ),
+                      SizedBox(
+                        width: 40,
+                      ),
+                      IconButton(
+                        onPressed: null,
+                        icon: Icon(
+                          Icons.location_city,
+                          color: Colors.white,
+                          size: 60,
+                        ),
+                      ),
+                    ],
+                  ),
+                )),
           ),
         ],
       ),
