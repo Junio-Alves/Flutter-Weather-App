@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:weather_app2/data/provider/weather_provider.dart';
 import 'package:weather_app2/pages/tabs_screen.dart';
-import 'package:weather_app2/data/provider/backgroundcolor.dart';
+import 'package:weather_app2/data/provider/backgroundcolor_provider.dart';
 
 void main() {
   runApp(const MyApp());

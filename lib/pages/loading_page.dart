@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:provider/provider.dart';
-import 'package:weather_app2/data/provider/backgroundcolor.dart';
+import 'package:weather_app2/data/provider/backgroundcolor_provider.dart';
 
 class LoadingPage extends StatelessWidget {
   const LoadingPage({super.key});
