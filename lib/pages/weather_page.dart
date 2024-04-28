@@ -139,51 +139,6 @@ class _WeatherPageState extends State<WeatherPage> {
                   }),
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.only(top: 50),
-            child: SizedBox(
-                height: 100,
-                child: Card(
-                  elevation: 9,
-                  color: Colors.grey.withOpacity(0.3),
-                  child: const Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      IconButton(
-                        onPressed: null,
-                        icon: Icon(
-                          Icons.home_outlined,
-                          color: Colors.white,
-                          size: 60,
-                        ),
-                      ),
-                      SizedBox(
-                        width: 40,
-                      ),
-                      IconButton(
-                        onPressed: null,
-                        icon: Icon(
-                          Icons.search,
-                          color: Colors.white,
-                          size: 60,
-                        ),
-                      ),
-                      SizedBox(
-                        width: 40,
-                      ),
-                      IconButton(
-                        onPressed: null,
-                        icon: Icon(
-                          Icons.location_city,
-                          color: Colors.white,
-                          size: 60,
-                        ),
-                      ),
-                    ],
-                  ),
-                )),
-          ),
         ],
       ),
     );

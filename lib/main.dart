@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:weather_app2/data/provider/weather_provider.dart';
 import 'package:weather_app2/pages/home_page.dart';
 import 'package:weather_app2/data/provider/backgroundcolor_provider.dart';
+import 'package:weather_app2/pages/tabs_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -24,7 +25,7 @@ class MyApp extends StatelessWidget {
       ],
       child: const MaterialApp(
         debugShowCheckedModeBanner: false,
-        home: HomePage(),
+        home: TabScreen(),
       ),
     );
   }
