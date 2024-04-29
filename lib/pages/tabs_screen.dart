@@ -26,38 +26,39 @@ class _TabScreenState extends State<TabScreen> {
     final backgroundProvider =
         Provider.of<BackgrounColorProvider>(context, listen: true);
     return Scaffold(
-      backgroundColor: backgroundProvider.backgroundColor,
       body: PageView(
         children: const [HomePage(), SearchPage()],
       ),
-      bottomNavigationBar: ClipRRect(
-        borderRadius: BorderRadius.circular(30),
-        child: BottomNavigationBar(
-          iconSize: 40,
-          backgroundColor: Colors.grey.withOpacity(0.3),
-          currentIndex: _paginaAtual,
-          items: const [
-            BottomNavigationBarItem(
-                icon: Icon(
-                  Icons.home,
-                  color: Colors.white,
-                  weight: 30,
-                ),
-                label: ""),
-            BottomNavigationBarItem(
-                icon: Icon(
-                  Icons.search,
-                  color: Colors.white,
-                ),
-                label: ""),
-            BottomNavigationBarItem(
-                icon: Icon(
-                  Icons.format_align_justify_sharp,
-                  color: Colors.white,
-                ),
-                label: ""),
-          ],
-        ),
+      bottomNavigationBar: BottomNavigationBar(
+        iconSize: 40,
+        backgroundColor: backgroundProvider.backgroundColor,
+        currentIndex: _paginaAtual,
+        unselectedItemColor: Colors.white,
+        selectedItemColor: Colors.white,
+        selectedFontSize: 15,
+        unselectedFontSize: 15,
+        items: const [
+          BottomNavigationBarItem(
+              backgroundColor: Colors.white,
+              icon: Icon(
+                Icons.home,
+                color: Colors.white,
+                weight: 30,
+              ),
+              label: "Home"),
+          BottomNavigationBarItem(
+              icon: Icon(
+                Icons.search,
+                color: Colors.white,
+              ),
+              label: "Search"),
+          BottomNavigationBarItem(
+              icon: Icon(
+                Icons.format_align_justify_sharp,
+                color: Colors.white,
+              ),
+              label: "Option"),
+        ],
       ),
     );
   }

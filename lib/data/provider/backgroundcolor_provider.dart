@@ -7,7 +7,7 @@ class BackgrounColorProvider extends ChangeNotifier {
     if (weather.currently == "dia") {
       backgroundColor = Colors.blue;
     } else if (weather.currently == "noite") {
-      backgroundColor = const Color.fromARGB(255, 10, 47, 78);
+      backgroundColor = const Color.fromARGB(255, 66, 1, 92);
     } else {
       backgroundColor = Colors.black;
     }

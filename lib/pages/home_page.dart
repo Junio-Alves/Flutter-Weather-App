@@ -33,20 +33,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     final provider = Provider.of<WeatherProvider>(context, listen: false);
-    final backgroundProvider =
-        Provider.of<BackgrounColorProvider>(context, listen: false);
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: backgroundProvider.backgroundColor,
-        actions: [
-          IconButton(
-            onPressed: () {},
-            icon: const Icon(Icons.toc_outlined),
-            color: Colors.white,
-            iconSize: 40,
-          )
-        ],
-      ),
       body: _isLoading
           ? const LoadingPage()
           : provider.error.isNotEmpty
