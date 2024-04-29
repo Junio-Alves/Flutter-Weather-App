@@ -34,8 +34,21 @@ class WeatherModel {
       description: map['description'].toString(),
       currently: map['currently'].toString(),
       city: map['city'].toString(),
-      humidity: map['humidity:'].toString(),
+      humidity: map['humidity'].toString(),
       forecast: map['forecast'],
     );
+  }
+
+  Map<String, dynamic> toMap() {
+    return {
+      'temp': temp,
+      'date': date,
+      'time': time,
+      'description': description,
+      'currently': currently,
+      'city': city,
+      'humidity': humidity,
+      'forecast': forecast,
+    };
   }
 }

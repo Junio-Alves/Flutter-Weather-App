@@ -1,12 +1,14 @@
 import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:weather_app2/data/utils/constants.dart';
+import 'package:weather_app2/data/utils/user_preferences.dart';
 import '../controller/position_controller.dart';
 import 'package:weather_app2/data/models/weather_model.dart';
 import "package:http/http.dart" as http;
 
 class WeatherProvider extends ChangeNotifier {
   final positionController = GetPosition();
+  final userPrefs = UserPreferences();
   List<WeatherModel> weathers = [];
   //verifica se está carregando
   bool isLoanding = true;
@@ -14,26 +16,36 @@ class WeatherProvider extends ChangeNotifier {
   String error = '';
 
   Future getWeather() async {
-    try {
-      await positionController.getPosition();
-      final result = await http.get(Uri.parse(
-          'https://api.hgbrasil.com/weather?key=${Constants.api_Key}&lat=${positionController.lat}&lon=${positionController.long}&user_ip=remote'));
+    Map<String, dynamic> userWeather = await userPrefs.getPreferences();
+    print(userWeather);
+    if (userWeather.containsKey("null")) {
+      try {
+        await positionController.getPosition();
+        final result = await http.get(Uri.parse(
+            'https://api.hgbrasil.com/weather?key=${Constants.api_Key}&lat=${positionController.lat}&lon=${positionController.long}&user_ip=remote'));
 
-      //TRATAMENTO DE ERROS
-      if (result.statusCode == 200) {
-        final body = jsonDecode(result.body);
-        //Caso statusCode seja 200, adiciona o resultado na lista.
-        weathers.add(WeatherModel.fromMap(body['results']));
-      } else if (result.statusCode == 404) {
-        error = result.statusCode.toString();
-        throw Exception("A url informada não é valida");
-      } else {
-        error = result.statusCode.toString();
-        throw Exception("Não foi possivel localizar previsão.");
+        //TRATAMENTO DE ERROS
+        if (result.statusCode == 200) {
+          weathers.clear();
+          final body = jsonDecode(result.body);
+          //Caso statusCode seja 200, adiciona o resultado na lista.
+          weathers.add(WeatherModel.fromMap(body['results']));
+          userPrefs.savePreferences(WeatherModel.fromMap(body['results']));
+        } else if (result.statusCode == 404) {
+          error = result.statusCode.toString();
+          throw Exception("A url informada não é valida");
+        } else {
+          error = result.statusCode.toString();
+          throw Exception("Não foi possivel localizar previsão.");
+        }
+      } catch (e) {
+        error = e.toString();
       }
-    } catch (e) {
-      error = e.toString();
+    } else {
+      weathers.clear();
+      weathers.add(WeatherModel.fromMap(userWeather));
     }
+
     //define o carregamento como falso.
     isLoanding = false;
     notifyListeners();
