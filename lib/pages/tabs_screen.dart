@@ -45,7 +45,7 @@ class _TabScreenState extends State<TabScreen> {
       ),
       bottomNavigationBar: BottomNavigationBar(
         onTap: _selectScreen,
-        iconSize: 40,
+        iconSize: 25,
         backgroundColor: backgroundProvider.backgroundColor,
         currentIndex: _paginaAtual,
         unselectedItemColor: Colors.white,

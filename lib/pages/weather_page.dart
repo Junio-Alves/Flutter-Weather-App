@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:weather_app2/data/models/weather_model.dart';
@@ -22,13 +24,10 @@ class _WeatherPageState extends State<WeatherPage> {
         body: Stack(
           children: [
             Container(
-              decoration: const BoxDecoration(
+              decoration: BoxDecoration(
                 gradient: LinearGradient(
                   begin: AlignmentDirectional.topCenter,
-                  colors: [
-                    Color.fromARGB(255, 172, 40, 224),
-                    Color.fromARGB(255, 95, 5, 131)
-                  ],
+                  colors: backgroundProvider.gradientBackgroundColor(weather),
                 ),
               ),
             ),
@@ -108,7 +107,7 @@ class _WeatherPageState extends State<WeatherPage> {
                         itemBuilder: (context, int index) {
                           return Card(
                             color: Colors.grey.withOpacity(0.3),
-                            elevation: 9,
+                            elevation: 3,
                             child: Padding(
                               padding: const EdgeInsets.all(10.0),
                               child: Column(

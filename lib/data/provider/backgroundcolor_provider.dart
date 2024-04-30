@@ -13,4 +13,20 @@ class BackgrounColorProvider extends ChangeNotifier {
     }
     notifyListeners();
   }
+
+  List<Color> gradientBackgroundColor(WeatherModel weather) {
+    if (weather.currently == "dia") {
+      return [
+        const Color.fromARGB(255, 255, 187, 0),
+        const Color.fromARGB(255, 255, 217, 0)
+      ];
+    } else if (weather.currently == "noite") {
+      return [
+        const Color.fromARGB(255, 172, 40, 224),
+        const Color.fromARGB(255, 95, 5, 131)
+      ];
+    } else {
+      return [backgroundColor = Colors.black];
+    }
+  }
 }
