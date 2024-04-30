@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:weather_app2/data/provider/weather_provider.dart';
 import 'package:weather_app2/data/provider/backgroundcolor_provider.dart';
+import 'package:weather_app2/data/utils/appRoutes.dart';
+import 'package:weather_app2/pages/option_page.dart';
+import 'package:weather_app2/pages/search_page.dart';
 import 'package:weather_app2/pages/tabs_screen.dart';
 
 void main() {
@@ -22,9 +25,13 @@ class MyApp extends StatelessWidget {
           create: ((context) => BackgrounColorProvider()),
         ),
       ],
-      child: const MaterialApp(
+      child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        home: TabScreen(),
+        routes: {
+          AppRoutes.home: (context) => const TabScreen(),
+          AppRoutes.option_page: (context) => const OptionPage(),
+          AppRoutes.search_page: (context) => const SearchPage(),
+        },
       ),
     );
   }

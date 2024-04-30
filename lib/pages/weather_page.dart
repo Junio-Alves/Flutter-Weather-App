@@ -1,6 +1,3 @@
-import 'dart:ui';
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:weather_app2/data/models/weather_model.dart';
@@ -21,17 +18,6 @@ class _WeatherPageState extends State<WeatherPage> {
     WeatherModel weather = widget.weather;
     final backgroundProvider = Provider.of<BackgrounColorProvider>(context);
     return Scaffold(
-        appBar: AppBar(
-          backgroundColor: Colors.transparent,
-          actions: [
-            IconButton(
-              onPressed: () {},
-              icon: const Icon(Icons.toc_outlined),
-              color: Colors.white,
-              iconSize: 40,
-            )
-          ],
-        ),
         backgroundColor: backgroundProvider.backgroundColor,
         body: Stack(
           children: [

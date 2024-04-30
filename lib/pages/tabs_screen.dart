@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:weather_app2/pages/home_page.dart';
+import 'package:weather_app2/pages/option_page.dart';
 import 'package:weather_app2/pages/search_page.dart';
 import 'package:weather_app2/data/provider/backgroundcolor_provider.dart';
+import 'package:weather_app2/pages/widgets/app_drawer.dart';
 
 class TabScreen extends StatefulWidget {
   const TabScreen({super.key});
@@ -12,7 +14,7 @@ class TabScreen extends StatefulWidget {
 }
 
 class _TabScreenState extends State<TabScreen> {
-  final _paginaAtual = 0;
+  int _paginaAtual = 0;
   late PageController pc;
 
   @override
@@ -21,15 +23,28 @@ class _TabScreenState extends State<TabScreen> {
     super.initState();
   }
 
+  void _selectScreen(int value) {
+    _paginaAtual = value;
+  }
+
   @override
   Widget build(BuildContext context) {
     final backgroundProvider =
         Provider.of<BackgrounColorProvider>(context, listen: true);
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: backgroundProvider.backgroundColor,
+      ),
+      drawer: const AppDrawer(),
       body: PageView(
-        children: const [HomePage(), SearchPage()],
+        children: const [
+          HomePage(),
+          SearchPage(),
+          OptionPage(),
+        ],
       ),
       bottomNavigationBar: BottomNavigationBar(
+        onTap: _selectScreen,
         iconSize: 40,
         backgroundColor: backgroundProvider.backgroundColor,
         currentIndex: _paginaAtual,
