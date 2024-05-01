@@ -5,7 +5,7 @@ class BackgrounColorProvider extends ChangeNotifier {
   Color backgroundColor = Colors.white;
   changeBackgroundColor(WeatherModel weather) {
     if (weather.currently == "dia") {
-      backgroundColor = Colors.blue;
+      backgroundColor = Color.fromARGB(255, 78, 190, 255);
     } else if (weather.currently == "noite") {
       backgroundColor = const Color.fromARGB(255, 172, 40, 224);
     } else {
@@ -17,8 +17,8 @@ class BackgrounColorProvider extends ChangeNotifier {
   List<Color> gradientBackgroundColor(WeatherModel weather) {
     if (weather.currently == "dia") {
       return [
-        const Color.fromARGB(255, 255, 187, 0),
-        const Color.fromARGB(255, 255, 217, 0)
+        Color.fromARGB(255, 255, 196, 0),
+        Color.fromARGB(255, 253, 207, 0),
       ];
     } else if (weather.currently == "noite") {
       return [

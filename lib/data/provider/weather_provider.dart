@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:developer';
 import 'package:flutter/foundation.dart';
+import 'package:intl/intl.dart';
 import 'package:weather_app2/data/utils/constants.dart';
 import 'package:weather_app2/data/sharedPreferences/user_preferences.dart';
 import '../controller/position_controller.dart';
@@ -10,6 +11,7 @@ import "package:http/http.dart" as http;
 class WeatherProvider extends ChangeNotifier {
   final positionController = GetPosition();
   final userPrefs = UserPreferences();
+  final _currentDate = DateFormat("dd/MM/yyyy").format(DateTime.now());
   List<WeatherModel> weathers = [];
   //verifica se está carregando
   bool isLoanding = true;
@@ -19,9 +21,11 @@ class WeatherProvider extends ChangeNotifier {
   Future getWeather() async {
     Map<String, dynamic> userWeather = await userPrefs.loadUserLocal();
     log(userWeather.toString());
+    log(_currentDate);
     //verifica se userWeather é null
     //caso sim, faz uma requisição para API
-    if (userWeather.containsKey("null")) {
+    if (userWeather.containsKey("null") ||
+        userWeather["date"] != _currentDate) {
       try {
         await positionController.getPosition();
         final result = await http.get(Uri.parse(

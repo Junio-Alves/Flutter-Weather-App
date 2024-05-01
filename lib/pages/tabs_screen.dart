@@ -33,7 +33,7 @@ class _TabScreenState extends State<TabScreen> {
         Provider.of<BackgrounColorProvider>(context, listen: true);
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: backgroundProvider.backgroundColor,
+        backgroundColor: Colors.white,
       ),
       drawer: const AppDrawer(),
       body: PageView(
@@ -46,31 +46,31 @@ class _TabScreenState extends State<TabScreen> {
       bottomNavigationBar: BottomNavigationBar(
         onTap: _selectScreen,
         iconSize: 25,
-        backgroundColor: backgroundProvider.backgroundColor,
+        backgroundColor: Colors.white,
         currentIndex: _paginaAtual,
-        unselectedItemColor: Colors.white,
-        selectedItemColor: Colors.white,
+        unselectedItemColor: Theme.of(context).primaryColor,
+        selectedItemColor: Theme.of(context).primaryColor,
         selectedFontSize: 15,
         unselectedFontSize: 15,
-        items: const [
+        items: [
           BottomNavigationBarItem(
               backgroundColor: Colors.white,
               icon: Icon(
                 Icons.home,
-                color: Colors.white,
+                color: Theme.of(context).primaryColor,
                 weight: 30,
               ),
               label: "Home"),
           BottomNavigationBarItem(
               icon: Icon(
                 Icons.search,
-                color: Colors.white,
+                color: Theme.of(context).primaryColor,
               ),
               label: "Search"),
           BottomNavigationBarItem(
               icon: Icon(
                 Icons.format_align_justify_sharp,
-                color: Colors.white,
+                color: Theme.of(context).primaryColor,
               ),
               label: "Option"),
         ],
