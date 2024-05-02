@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:weather_app2/pages/home_page.dart';
 import 'package:weather_app2/pages/option_page.dart';
 import 'package:weather_app2/pages/search_page.dart';
-import 'package:weather_app2/data/provider/backgroundcolor_provider.dart';
 import 'package:weather_app2/pages/widgets/app_drawer.dart';
 
 class TabScreen extends StatefulWidget {
@@ -29,12 +27,12 @@ class _TabScreenState extends State<TabScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final backgroundProvider =
-        Provider.of<BackgrounColorProvider>(context, listen: true);
+    //final backgroundProvider =
+    //    Provider.of<BackgrounColorProvider>(context, listen: true);
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-      ),
+      //appBar: AppBar(
+      //  backgroundColor: Colors.white,
+      //),
       drawer: const AppDrawer(),
       body: PageView(
         children: const [

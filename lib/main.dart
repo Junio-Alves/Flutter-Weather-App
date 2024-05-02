@@ -26,7 +26,9 @@ class MyApp extends StatelessWidget {
         ),
       ],
       child: MaterialApp(
-        theme: ThemeData(primaryColor: Color.fromARGB(255, 28, 56, 99)),
+        theme: ThemeData(
+            primaryColor: const Color.fromARGB(255, 28, 56, 99),
+            secondaryHeaderColor: Colors.white),
         debugShowCheckedModeBanner: false,
         routes: {
           AppRoutes.home: (context) => const TabScreen(),
