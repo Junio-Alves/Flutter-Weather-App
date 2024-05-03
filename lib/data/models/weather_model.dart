@@ -1,34 +1,12 @@
 class WeatherModel {
-  //Temperatura
   String temp;
-  //Data
   String date;
-  //Tempo
   String time;
-  //Descricão
   String description;
-  //Dia ou noite
   String currently;
-  //Cidade
   String city;
-  //Humidade
   String humidity;
-  //Lista de previsoões dos proximos dias
-  //Colocar
-  //"humidity": 77,
-  /*"cloudiness": 20,
-    "rain": 0,
-    "wind_speedy": "5.14 km/h",
-    "wind_direction": 70,
-    "wind_cardinal": "ENE",
-    "sunrise": "07:42 am",
-    "sunset": "08:52 pm",
-    "moon_phase": "last_quarter",
-    "condition_slug": "cloudly_night",
-    "city_name": "Miami",
-    "timezone": "-04:00", */
   List<dynamic> forecast;
-
   WeatherModel(
       {required this.temp,
       required this.date,

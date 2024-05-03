@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:weather_app2/pages/home_page.dart';
+import 'package:weather_app2/data/models/weather_model.dart';
 import 'package:weather_app2/pages/option_page.dart';
 import 'package:weather_app2/pages/search_page.dart';
-import 'package:weather_app2/pages/widgets/app_drawer.dart';
+import 'package:weather_app2/pages/app_drawer.dart';
+import 'package:weather_app2/pages/weather_page.dart';
 
 class TabScreen extends StatefulWidget {
-  const TabScreen({super.key});
+  final WeatherModel weather;
+  const TabScreen({super.key, required this.weather});
 
   @override
   State<TabScreen> createState() => _TabScreenState();
@@ -22,25 +24,21 @@ class _TabScreenState extends State<TabScreen> {
   }
 
   void _selectScreen(int value) {
-    _paginaAtual = value;
+    setState(() {
+      _paginaAtual = value;
+    });
   }
 
   @override
   Widget build(BuildContext context) {
-    //final backgroundProvider =
-    //    Provider.of<BackgrounColorProvider>(context, listen: true);
+    final List<Widget> _telas = [
+      WeatherPage(weather: widget.weather),
+      const SearchPage(),
+      const OptionPage(),
+    ];
     return Scaffold(
-      //appBar: AppBar(
-      //  backgroundColor: Colors.white,
-      //),
       drawer: const AppDrawer(),
-      body: PageView(
-        children: const [
-          HomePage(),
-          SearchPage(),
-          OptionPage(),
-        ],
-      ),
+      body: _telas[_paginaAtual],
       bottomNavigationBar: BottomNavigationBar(
         onTap: _selectScreen,
         iconSize: 25,

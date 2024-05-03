@@ -3,7 +3,7 @@ import 'package:weather_app2/data/provider/weather_provider.dart';
 import 'package:weather_app2/data/provider/backgroundcolor_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:weather_app2/pages/loading_page.dart';
-import 'package:weather_app2/pages/weather_page.dart';
+import 'package:weather_app2/pages/tabs_screen.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -38,8 +38,8 @@ class _HomePageState extends State<HomePage> {
           ? const LoadingPage()
           : provider.error.isNotEmpty
               ? getErrorUI(provider.error)
-              : WeatherPage(
-                  weather: provider.weathers[0],
+              : TabScreen(
+                  weather: provider.weathers.first,
                 ),
     );
   }
