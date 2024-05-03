@@ -9,9 +9,8 @@ class AppDrawer extends StatelessWidget {
   Widget build(BuildContext context) {
     final backgroundProvider =
         Provider.of<BackgrounColorProvider>(context, listen: true);
-    return Drawer(
-      backgroundColor: Colors.white,
-      child: Column(
+    return Scaffold(
+      body: Column(
         children: [
           AppBar(
             title: const Text(

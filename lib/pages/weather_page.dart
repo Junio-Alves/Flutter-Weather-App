@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:weather_app2/data/models/weather_model.dart';
 import 'package:weather_app2/data/provider/backgroundcolor_provider.dart';
+import 'package:weather_app2/data/utils/appRoutes.dart';
 import 'package:weather_app2/pages/widgets/draggable_widget.dart';
 
 class WeatherPage extends StatefulWidget {
@@ -68,7 +69,10 @@ class _WeatherPageState extends State<WeatherPage> {
                           ],
                         ),
                         IconButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              Navigator.pushNamed(
+                                  context, AppRoutes.drawer_page);
+                            },
                             color: Colors.white,
                             icon: const Icon(Icons.table_rows_rounded))
                       ],

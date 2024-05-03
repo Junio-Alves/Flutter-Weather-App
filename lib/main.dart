@@ -3,6 +3,8 @@ import 'package:provider/provider.dart';
 import 'package:weather_app2/data/provider/weather_provider.dart';
 import 'package:weather_app2/data/provider/backgroundcolor_provider.dart';
 import 'package:weather_app2/data/utils/appRoutes.dart';
+import 'package:weather_app2/pages/app_drawer.dart';
+import 'package:weather_app2/pages/forecast_page.dart';
 import 'package:weather_app2/pages/home_or_error.dart';
 import 'package:weather_app2/pages/option_page.dart';
 import 'package:weather_app2/pages/search_page.dart';
@@ -34,6 +36,8 @@ class MyApp extends StatelessWidget {
           AppRoutes.home: (context) => const HomePage(),
           AppRoutes.option_page: (context) => const OptionPage(),
           AppRoutes.search_page: (context) => const SearchPage(),
+          AppRoutes.forecast_page: (context) => const ForecastPage(),
+          AppRoutes.drawer_page: (context) => const AppDrawer(),
         },
       ),
     );

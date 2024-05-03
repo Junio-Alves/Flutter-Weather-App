@@ -1,7 +1,6 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:weather_app2/data/models/weather_model.dart';
+import 'package:weather_app2/data/utils/appRoutes.dart';
 import 'package:weather_app2/data/utils/imageIcon.dart';
 
 class DraggableWidget extends StatefulWidget {
@@ -54,7 +53,11 @@ class _DraggableWidgetState extends State<DraggableWidget> {
                               itemBuilder: (context, int index) {
                                 return InkWell(
                                   onTap: () {
-                                    log(index.toString());
+                                    Navigator.pushNamed(
+                                      context,
+                                      AppRoutes.forecast_page,
+                                      arguments: weather.forecast[index],
+                                    );
                                   },
                                   child: Padding(
                                     padding:
