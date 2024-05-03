@@ -49,6 +49,13 @@ class _WeatherPageState extends State<WeatherPage> {
                               //NOME DA CIDADE
                               weather.city,
                               style: TextStyle(
+                                  shadows: const [
+                                    Shadow(
+                                      offset: Offset(2, 2),
+                                      blurRadius: 10.0,
+                                      color: Colors.black38,
+                                    ),
+                                  ],
                                   fontSize: 30,
                                   color: Theme.of(context).secondaryHeaderColor,
                                   fontWeight: FontWeight.bold),
@@ -72,6 +79,13 @@ class _WeatherPageState extends State<WeatherPage> {
                           //DESCRIÇÃO DO TEMPO E DATA
                           "${weather.description}  ${weather.date}",
                           style: TextStyle(
+                              shadows: const [
+                                Shadow(
+                                  offset: Offset(2, 2),
+                                  blurRadius: 10.0,
+                                  color: Colors.black38,
+                                ),
+                              ],
                               fontSize: 15,
                               color: Theme.of(context).secondaryHeaderColor,
                               fontWeight: FontWeight.bold),
@@ -86,6 +100,13 @@ class _WeatherPageState extends State<WeatherPage> {
                             //TEMPERATURA
                             "${weather.temp}°",
                             style: TextStyle(
+                              shadows: const [
+                                Shadow(
+                                  offset: Offset(2, 2),
+                                  blurRadius: 10.0,
+                                  color: Colors.black38,
+                                ),
+                              ],
                               fontSize: 90,
                               color: Theme.of(context).secondaryHeaderColor,
                             ),

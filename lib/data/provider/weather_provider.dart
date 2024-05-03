@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 import 'package:flutter/foundation.dart';
 import 'package:intl/intl.dart';
 import 'package:weather_app2/data/utils/constants.dart';
@@ -19,6 +20,7 @@ class WeatherProvider extends ChangeNotifier {
   //*Função getWeather faz uma requisição na API, e salva os dados em "weathers"
   Future getWeather() async {
     Map<String, dynamic> userWeather = await userPrefs.loadUserData();
+    log(userWeather.toString());
     //*Verifica se existe algum dado salvo no dispostivo, caso o valor neja null
     // faz uma nova requisição na API.
 
@@ -35,6 +37,7 @@ class WeatherProvider extends ChangeNotifier {
                 Constants.api(position.lat, position.long),
               ),
             );
+            log(result.toString());
             //TRATAMENTO DE ERROS
             //STATUS CODE 200: TUDO OK
             if (result.statusCode == 200) {

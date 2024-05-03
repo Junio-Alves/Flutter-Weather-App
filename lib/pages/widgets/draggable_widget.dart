@@ -106,37 +106,51 @@ class _DraggableWidgetState extends State<DraggableWidget> {
                               }),
                     ),
                   ),
-                  const Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Column(
+                      Text(
+                        "Probabilidade de Chuva: ${weather.forecast[0]["rain_probability"]}",
+                        style: const TextStyle(fontSize: 20),
+                      ),
+                      Text(
+                        "Velocidade dos Ventos: ${weather.forecast[0]["wind_speedy"]}",
+                        style: const TextStyle(fontSize: 20),
+                      ),
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Text(
-                            "Maxima",
-                            style: TextStyle(fontSize: 20),
+                          Row(
+                            children: [
+                              const Icon(
+                                Icons.arrow_upward,
+                                color: Colors.red,
+                              ),
+                              Text(
+                                "Maxima: ${weather.forecast[0]["max"]}",
+                                style: const TextStyle(fontSize: 20),
+                              ),
+                            ],
                           ),
-                          Text(
-                            "Minima",
-                            style: TextStyle(fontSize: 20),
+                          const SizedBox(
+                            width: 30,
                           ),
+                          Row(
+                            children: [
+                              const Icon(
+                                Icons.arrow_downward,
+                                color: Colors.green,
+                              ),
+                              Text(
+                                "Minima: ${weather.forecast[0]["min"]}",
+                                style: const TextStyle(fontSize: 20),
+                              ),
+                            ],
+                          )
                         ],
                       ),
-                      SizedBox(
-                        width: 30,
-                      ),
-                      Column(
-                        children: [
-                          Text(
-                            " Probabilidade de Chuva",
-                            style: TextStyle(fontSize: 20),
-                          ),
-                          Text(
-                            "Velocidade dos Ventos",
-                            style: TextStyle(fontSize: 20),
-                          ),
-                        ],
-                      )
                     ],
                   ),
                 ],
