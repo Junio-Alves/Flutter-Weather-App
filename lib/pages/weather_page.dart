@@ -16,6 +16,7 @@ class _WeatherPageState extends State<WeatherPage> {
   @override
   Widget build(BuildContext context) {
     WeatherModel weather = widget.weather;
+    // ignore: unused_local_variable
     final backgroundProvider = Provider.of<BackgrounColorProvider>(context);
     return Scaffold(
       body: Stack(

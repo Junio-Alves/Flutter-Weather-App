@@ -11,7 +11,7 @@ class UserPreferences {
     await prefs.setString("userPreferences", userWeatherJson);
   }
 
-  Future<Map<String, dynamic>> loadUserLocal() async {
+  Future<Map<String, dynamic>> loadUserData() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     final Map<String, dynamic> userWeatherJson;
     //verifica se "userPreferences" está vazia
