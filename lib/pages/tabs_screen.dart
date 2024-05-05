@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:weather_app2/data/models/weather_model.dart';
 import 'package:weather_app2/pages/option_page.dart';
 import 'package:weather_app2/pages/search_page.dart';
-import 'package:weather_app2/pages/app_drawer.dart';
 import 'package:weather_app2/pages/weather_page.dart';
 
 class TabScreen extends StatefulWidget {
@@ -37,7 +36,6 @@ class _TabScreenState extends State<TabScreen> {
       const OptionPage(),
     ];
     return Scaffold(
-      drawer: const AppDrawer(),
       body: _telas[_paginaAtual],
       bottomNavigationBar: BottomNavigationBar(
         onTap: _selectScreen,

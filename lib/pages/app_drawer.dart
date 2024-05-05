@@ -1,27 +1,56 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:weather_app2/data/provider/backgroundcolor_provider.dart';
+import 'package:weather_app2/data/models/weather_model.dart';
+import 'package:weather_app2/pages/widgets/text_shadow.dart';
 
 class AppDrawer extends StatelessWidget {
   const AppDrawer({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final backgroundProvider =
-        Provider.of<BackgrounColorProvider>(context, listen: true);
+    final weather = ModalRoute.of(context)!.settings.arguments as WeatherModel;
     return Scaffold(
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(100),
+        child: AppBar(
+          flexibleSpace: Container(
+            decoration: const BoxDecoration(
+              image: DecorationImage(
+                  image: AssetImage("assets/background/2.jpg"),
+                  fit: BoxFit.cover),
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    textshadow(
+                      text: "${weather.temp}°",
+                      fontsize: 50,
+                      color: Theme.of(context).secondaryHeaderColor,
+                      fontWeight: FontWeight.normal,
+                    ),
+                    textshadow(
+                      text: weather.city,
+                      fontsize: 30,
+                      color: Theme.of(context).secondaryHeaderColor,
+                      fontWeight: FontWeight.normal,
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+          backgroundColor: Colors.transparent,
+        ),
+      ),
       body: Column(
         children: [
-          AppBar(
-            title: const Text(
-              "Weather App v1 ",
-              style: TextStyle(fontSize: 25, color: Colors.white),
-            ),
-            backgroundColor: backgroundProvider.backgroundColor,
-          ),
           ListTile(
-            leading: const Icon(Icons.supervised_user_circle),
-            title: const Text("Perfil"),
+            leading: const Icon(Icons.announcement_outlined),
+            title: const Text("Feedback"),
             onTap: () {},
           ),
           ListTile(

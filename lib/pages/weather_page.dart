@@ -4,6 +4,7 @@ import 'package:weather_app2/data/models/weather_model.dart';
 import 'package:weather_app2/data/provider/backgroundcolor_provider.dart';
 import 'package:weather_app2/data/utils/appRoutes.dart';
 import 'package:weather_app2/pages/widgets/draggable_widget.dart';
+import 'package:weather_app2/pages/widgets/text_shadow.dart';
 
 class WeatherPage extends StatefulWidget {
   final WeatherModel weather;
@@ -46,20 +47,11 @@ class _WeatherPageState extends State<WeatherPage> {
                       children: [
                         Row(
                           children: [
-                            Text(
-                              //NOME DA CIDADE
-                              weather.city,
-                              style: TextStyle(
-                                  shadows: const [
-                                    Shadow(
-                                      offset: Offset(2, 2),
-                                      blurRadius: 10.0,
-                                      color: Colors.black38,
-                                    ),
-                                  ],
-                                  fontSize: 30,
-                                  color: Theme.of(context).secondaryHeaderColor,
-                                  fontWeight: FontWeight.bold),
+                            textshadow(
+                              text: weather.city,
+                              fontsize: 30,
+                              color: Theme.of(context).secondaryHeaderColor,
+                              fontWeight: FontWeight.bold,
                             ),
                             Icon(
                               Icons.add_location_rounded,
@@ -71,7 +63,8 @@ class _WeatherPageState extends State<WeatherPage> {
                         IconButton(
                             onPressed: () {
                               Navigator.pushNamed(
-                                  context, AppRoutes.drawer_page);
+                                  context, AppRoutes.drawer_page,
+                                  arguments: weather);
                             },
                             color: Colors.white,
                             icon: const Icon(Icons.table_rows_rounded))
@@ -79,20 +72,11 @@ class _WeatherPageState extends State<WeatherPage> {
                     ),
                     Row(
                       children: [
-                        Text(
-                          //DESCRIÇÃO DO TEMPO E DATA
-                          "${weather.description}  ${weather.date}",
-                          style: TextStyle(
-                              shadows: const [
-                                Shadow(
-                                  offset: Offset(2, 2),
-                                  blurRadius: 10.0,
-                                  color: Colors.black38,
-                                ),
-                              ],
-                              fontSize: 15,
-                              color: Theme.of(context).secondaryHeaderColor,
-                              fontWeight: FontWeight.bold),
+                        textshadow(
+                          text: "${weather.description}  ${weather.date}",
+                          fontsize: 15,
+                          color: Theme.of(context).secondaryHeaderColor,
+                          fontWeight: FontWeight.bold,
                         ),
                       ],
                     ),
@@ -100,20 +84,11 @@ class _WeatherPageState extends State<WeatherPage> {
                       padding: const EdgeInsets.only(),
                       child: Row(
                         children: [
-                          Text(
-                            //TEMPERATURA
-                            "${weather.temp}°",
-                            style: TextStyle(
-                              shadows: const [
-                                Shadow(
-                                  offset: Offset(2, 2),
-                                  blurRadius: 10.0,
-                                  color: Colors.black38,
-                                ),
-                              ],
-                              fontSize: 90,
-                              color: Theme.of(context).secondaryHeaderColor,
-                            ),
+                          textshadow(
+                            text: "${weather.temp}°",
+                            fontsize: 90,
+                            color: Theme.of(context).secondaryHeaderColor,
+                            fontWeight: FontWeight.normal,
                           ),
                         ],
                       ),
