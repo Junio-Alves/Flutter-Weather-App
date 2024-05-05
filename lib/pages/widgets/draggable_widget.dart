@@ -27,8 +27,9 @@ class _DraggableWidgetState extends State<DraggableWidget> {
           return SingleChildScrollView(
             controller: scrollController,
             child: Container(
-              constraints:
-                  BoxConstraints(maxHeight: MediaQuery.of(context).size.height),
+              constraints: const BoxConstraints(
+                maxHeight: 500,
+              ),
               decoration: const BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.only(

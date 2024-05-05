@@ -63,7 +63,7 @@ class _TabScreenState extends State<TabScreen> {
               label: "Search"),
           BottomNavigationBarItem(
               icon: Icon(
-                Icons.format_align_justify_sharp,
+                Icons.settings,
                 color: Theme.of(context).primaryColor,
               ),
               label: "Option"),
