@@ -20,8 +20,8 @@ class _DraggableWidgetState extends State<DraggableWidget> {
     WeatherModel weather = widget.weather;
     return Expanded(
       child: DraggableScrollableSheet(
-        initialChildSize: 0.2,
-        minChildSize: 0.2,
+        initialChildSize: 0.25,
+        minChildSize: 0.25,
         maxChildSize: 0.7,
         builder: (context, ScrollController scrollController) {
           return SingleChildScrollView(
