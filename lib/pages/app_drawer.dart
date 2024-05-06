@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:weather_app2/data/models/weather_model.dart';
+import 'package:weather_app2/data/utils/appRoutes.dart';
 import 'package:weather_app2/pages/widgets/text_shadow.dart';
 
 class AppDrawer extends StatelessWidget {
@@ -51,17 +52,23 @@ class AppDrawer extends StatelessWidget {
           ListTile(
             leading: const Icon(Icons.announcement_outlined),
             title: const Text("Feedback"),
-            onTap: () {},
+            onTap: () {
+              Navigator.pushNamed(context, AppRoutes.feedback_page);
+            },
           ),
           ListTile(
             leading: const Icon(Icons.settings),
             title: const Text("Configurações"),
-            onTap: () {},
+            onTap: () {
+              Navigator.pushNamed(context, AppRoutes.option_page);
+            },
           ),
           ListTile(
             leading: const Icon(Icons.question_mark),
             title: const Text("Sobre"),
-            onTap: () {},
+            onTap: () {
+              Navigator.pushNamed(context, AppRoutes.about_page);
+            },
           )
         ],
       ),

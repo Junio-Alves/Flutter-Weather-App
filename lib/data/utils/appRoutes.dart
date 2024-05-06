@@ -4,4 +4,6 @@ class AppRoutes {
   static const option_page = "/option";
   static const forecast_page = "/forecast_page";
   static const drawer_page = "/drawer_page";
+  static const feedback_page = "/feedback_page";
+  static const about_page = "/about_page";
 }

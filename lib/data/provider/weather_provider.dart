@@ -26,8 +26,7 @@ class WeatherProvider extends ChangeNotifier {
     //*Verifica tambem se ja passou 24hrs desde a primeira requisição na API,
     // caso sim, faz uma nova requisição na API.
 
-    if (userWeather.containsKey("null") ||
-        userWeather["date"] != _currentDate) {
+    if (weathers.isEmpty) {
       try {
         await position.getPosition();
         final result = await http.get(
