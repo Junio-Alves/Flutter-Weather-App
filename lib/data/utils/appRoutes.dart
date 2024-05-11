@@ -6,4 +6,5 @@ class AppRoutes {
   static const drawer_page = "/drawer_page";
   static const feedback_page = "/feedback_page";
   static const about_page = "/about_page";
+  static const search_page_detail = "/search_page_detail";
 }

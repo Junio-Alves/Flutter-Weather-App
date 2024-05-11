@@ -47,6 +47,7 @@ class _TabScreenState extends State<TabScreen> {
         selectedFontSize: 15,
         unselectedFontSize: 15,
         items: [
+          //Home
           BottomNavigationBarItem(
               backgroundColor: Colors.white,
               icon: Icon(
@@ -55,12 +56,14 @@ class _TabScreenState extends State<TabScreen> {
                 weight: 30,
               ),
               label: "Home"),
+          //Search
           BottomNavigationBarItem(
               icon: Icon(
                 Icons.search,
                 color: Theme.of(context).primaryColor,
               ),
               label: "Search"),
+          //Option
           BottomNavigationBarItem(
               icon: Icon(
                 Icons.settings,

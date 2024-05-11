@@ -26,7 +26,7 @@ class WeatherModel {
       currently: map['currently'].toString(),
       city: map['city'].toString(),
       humidity: map['humidity'].toString(),
-      forecast: map['forecast'],
+      forecast: map["forecast"],
     );
   }
 

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:weather_app2/data/provider/weather_provider.dart';
-import 'package:weather_app2/data/provider/backgroundcolor_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:weather_app2/pages/loading_page.dart';
 import 'package:weather_app2/pages/tabs_screen.dart';
@@ -18,12 +17,9 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     final weatherProvider =
         Provider.of<WeatherProvider>(context, listen: false);
-    final backgroundProvider =
-        Provider.of<BackgrounColorProvider>(context, listen: false);
 
     weatherProvider.getWeather().then((value) {
       setState(() {
-        backgroundProvider.changeBackgroundColor(weatherProvider.weathers[0]);
         _isLoading = false;
       });
     });

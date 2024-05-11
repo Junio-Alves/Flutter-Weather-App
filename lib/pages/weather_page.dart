@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:weather_app2/data/models/weather_model.dart';
-import 'package:weather_app2/data/provider/backgroundcolor_provider.dart';
 import 'package:weather_app2/data/utils/appRoutes.dart';
 import 'package:weather_app2/pages/widgets/draggable_widget.dart';
 import 'package:weather_app2/pages/widgets/text_shadow.dart';
@@ -18,8 +16,6 @@ class _WeatherPageState extends State<WeatherPage> {
   @override
   Widget build(BuildContext context) {
     WeatherModel weather = widget.weather;
-    // ignore: unused_local_variable
-    final backgroundProvider = Provider.of<BackgrounColorProvider>(context);
     return Scaffold(
       body: Stack(
         children: [

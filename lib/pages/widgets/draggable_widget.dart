@@ -53,6 +53,7 @@ class _DraggableWidgetState extends State<DraggableWidget> {
                               itemCount: weather.forecast.length,
                               itemBuilder: (context, int index) {
                                 return InkWell(
+                                  focusColor: Colors.grey,
                                   onTap: () {
                                     Navigator.pushNamed(
                                       context,
@@ -60,50 +61,54 @@ class _DraggableWidgetState extends State<DraggableWidget> {
                                       arguments: weather.forecast[index],
                                     );
                                   },
-                                  child: Padding(
-                                    padding:
-                                        const EdgeInsets.only(left: 23, top: 5),
-                                    child: Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                      children: [
-                                        Row(
-                                          children: [
-                                            Image.asset(
-                                              //ICONE(DIA OU NOITE)
-                                              imageIcon(weather.forecast[index]
-                                                  ["condition"]),
-                                              height: 40,
-                                              width: 40,
-                                            ),
-                                          ],
-                                        ),
-                                        Row(
-                                          children: [
-                                            Text(
-                                              '${weather.forecast[index]["weekday"]}',
-                                              style: TextStyle(
-                                                  color: Theme.of(context)
-                                                      .primaryColor,
-                                                  fontSize: 20,
-                                                  fontWeight: FontWeight.bold),
-                                            )
-                                          ],
-                                        ),
-                                        Row(
-                                          children: [
-                                            Text(
-                                              '${weather.forecast[index]["date"]}',
-                                              style: TextStyle(
-                                                  color: Theme.of(context)
-                                                      .primaryColor,
-                                                  fontSize: 20),
-                                            )
-                                          ],
-                                        ),
-                                      ],
+                                  child: SizedBox(
+                                    child: Padding(
+                                      padding: const EdgeInsets.only(
+                                          left: 23, top: 5),
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        children: [
+                                          Row(
+                                            children: [
+                                              Image.asset(
+                                                //ICONE(DIA OU NOITE)
+                                                imageIcon(
+                                                    weather.forecast[index]
+                                                        ["condition"]),
+                                                height: 40,
+                                                width: 40,
+                                              ),
+                                            ],
+                                          ),
+                                          Row(
+                                            children: [
+                                              Text(
+                                                '${weather.forecast[index]["weekday"]}',
+                                                style: TextStyle(
+                                                    color: Theme.of(context)
+                                                        .primaryColor,
+                                                    fontSize: 20,
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              )
+                                            ],
+                                          ),
+                                          Row(
+                                            children: [
+                                              Text(
+                                                '${weather.forecast[index]["date"]}',
+                                                style: TextStyle(
+                                                    color: Theme.of(context)
+                                                        .primaryColor,
+                                                    fontSize: 20),
+                                              )
+                                            ],
+                                          ),
+                                        ],
+                                      ),
                                     ),
                                   ),
                                 );
