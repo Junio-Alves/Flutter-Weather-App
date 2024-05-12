@@ -12,7 +12,15 @@ Widget cityBox(
     child: Container(
       height: 120,
       decoration: BoxDecoration(
-        color: Colors.grey,
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.7),
+            spreadRadius: 1,
+            blurRadius: 5,
+            offset: const Offset(0, 3), // changes position of shadow
+          ),
+        ],
+        color: const Color.fromARGB(255, 58, 134, 60).withOpacity(0.9),
         borderRadius: BorderRadius.circular(15),
       ),
       child: Row(
