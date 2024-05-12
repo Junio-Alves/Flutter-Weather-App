@@ -4,12 +4,12 @@ import 'package:weather_app2/data/provider/searchWeather.dart';
 import 'package:weather_app2/data/provider/weather_provider.dart';
 import 'package:weather_app2/data/provider/backgroundcolor_provider.dart';
 import 'package:weather_app2/data/utils/appRoutes.dart';
-import 'package:weather_app2/pages/about_page.dart';
-import 'package:weather_app2/pages/app_drawer.dart';
-import 'package:weather_app2/pages/feedback_page.dart';
-import 'package:weather_app2/pages/forecast_page.dart';
+import 'package:weather_app2/pages/drawer/about_page.dart';
+import 'package:weather_app2/pages/home/app_drawer_page.dart';
+import 'package:weather_app2/pages/drawer/feedback_page.dart';
+import 'package:weather_app2/pages/home/forecast_page.dart';
 import 'package:weather_app2/pages/home_or_error.dart';
-import 'package:weather_app2/pages/option_page.dart';
+import 'package:weather_app2/pages/option/option_page.dart';
 import 'package:weather_app2/pages/search_page.dart';
 
 void main() {

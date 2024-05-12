@@ -163,8 +163,19 @@ class _SearchPageState extends State<SearchPage> {
                                 onPressed: () {
                                   setState(
                                     () {
-                                      _favoriteCitys.add(
-                                          searchWeather.searchResult.first);
+                                      bool isFavorite = false;
+                                      for (WeatherModel weather
+                                          in _favoriteCitys) {
+                                        if (weather.city ==
+                                            searchWeather
+                                                .searchResult.first.city) {
+                                          isFavorite = true;
+                                        }
+                                      }
+                                      if (isFavorite == false) {
+                                        _favoriteCitys.add(
+                                            searchWeather.searchResult.first);
+                                      }
                                     },
                                   );
                                 },

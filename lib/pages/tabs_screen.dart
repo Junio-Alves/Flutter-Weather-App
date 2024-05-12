@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:weather_app2/data/models/weather_model.dart';
-import 'package:weather_app2/pages/option_page.dart';
+import 'package:weather_app2/pages/option/option_page.dart';
 import 'package:weather_app2/pages/search_page.dart';
-import 'package:weather_app2/pages/weather_page.dart';
+import 'package:weather_app2/pages/home/weather_page.dart';
 
 class TabScreen extends StatefulWidget {
   final WeatherModel weather;

@@ -1,4 +1,5 @@
 class WeatherModel {
+  bool isFavorite = false;
   String temp;
   String date;
   String time;

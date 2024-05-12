@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:weather_app2/data/models/weather_model.dart';
 import 'package:weather_app2/data/utils/imageIcon.dart';
 
