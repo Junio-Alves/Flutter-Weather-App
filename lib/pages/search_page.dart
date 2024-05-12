@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:weather_app2/data/models/weather_model.dart';
 import 'package:weather_app2/data/provider/searchWeather.dart';
 import 'package:weather_app2/data/utils/imageIcon.dart';
+import 'package:weather_app2/pages/widgets/search_city_widget.dart';
+import 'package:weather_app2/pages/widgets/text_shadow.dart';
 
 class SearchPage extends StatefulWidget {
   const SearchPage({super.key});
@@ -13,12 +16,13 @@ class SearchPage extends StatefulWidget {
 class _SearchPageState extends State<SearchPage> {
   final _searchController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
-  final searchWeather = SearchWeather();
   final List<WeatherModel> _searchResult = [];
   final List<WeatherModel> _searchHistory = [];
-
+  final List<WeatherModel> _favoriteCitys = [];
   @override
   Widget build(BuildContext context) {
+    final searchWeather = Provider.of<SearchWeather>(context);
+
     Future<dynamic> errorPopUpWidget(String error, BuildContext context) {
       return showDialog(
         context: context,
@@ -31,22 +35,13 @@ class _SearchPageState extends State<SearchPage> {
     }
 
     searchCity() async {
-      _searchResult.add(
-        await searchWeather
-            .getWeather(cityname: _searchController.text)
-            .catchError(
-          (error, stackTrace) {
-            errorPopUpWidget(error, context);
-          },
-        ),
-      );
+      await searchWeather.getWeather(cityname: _searchController.text);
       if (searchWeather.error.isEmpty) {
-        setState(
-          () {
-            _searchHistory.add(_searchResult.last);
-            _searchController.clear();
-          },
-        );
+        _searchResult.add(searchWeather.searchResult.first);
+        _searchHistory.add(_searchResult.last);
+        _searchController.clear();
+      } else {
+        errorPopUpWidget(searchWeather.error, context);
       }
     }
 
@@ -101,7 +96,7 @@ class _SearchPageState extends State<SearchPage> {
                         if (_formKey.currentState!.validate()) {
                           setState(
                             () {
-                              _searchResult.clear;
+                              searchWeather.searchResult.clear();
                               searchCity();
                             },
                           );
@@ -114,6 +109,7 @@ class _SearchPageState extends State<SearchPage> {
               ],
             ),
           ),
+          //Resultado Da Pesquisa
           if (_searchResult.isNotEmpty)
             Padding(
               padding: const EdgeInsets.all(10.0),
@@ -126,22 +122,21 @@ class _SearchPageState extends State<SearchPage> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        Text(
-                          _searchHistory.last.city,
-                          style: const TextStyle(
-                              fontSize: 20, fontWeight: FontWeight.bold),
-                        ),
-                        Text(
-                          _searchHistory.last.description,
-                          style: const TextStyle(
-                              fontSize: 17, color: Colors.black54),
-                        ),
-                        Text(
-                          "${_searchHistory.last.temp}º",
-                          style: const TextStyle(
-                            fontSize: 50,
-                          ),
-                        ),
+                        textshadow(
+                            text: _searchHistory.last.city,
+                            fontsize: 20,
+                            color: Colors.black,
+                            fontWeight: FontWeight.bold),
+                        textshadow(
+                            text: _searchHistory.last.description,
+                            fontsize: 17,
+                            color: Colors.black,
+                            fontWeight: FontWeight.normal),
+                        textshadow(
+                            text: "${_searchHistory.last.temp}º",
+                            fontsize: 50,
+                            color: Colors.black,
+                            fontWeight: FontWeight.normal),
                       ],
                     ),
                     Column(
@@ -157,33 +152,7 @@ class _SearchPageState extends State<SearchPage> {
                 ),
               ),
             ),
-          const Row(
-            children: [
-              Padding(
-                padding: EdgeInsets.only(left: 10),
-                child: Text(
-                  "Cidades Salvas.",
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                ),
-              ),
-            ],
-          ),
-          SizedBox(
-            height: 100,
-            width: 300,
-            child: _searchHistory.isNotEmpty
-                ? ListView.builder(
-                    scrollDirection: Axis.horizontal,
-                    itemCount: _searchHistory.length,
-                    itemBuilder: (context, int index) {
-                      return cityBox(
-                          weatherHistory: _searchHistory, index: index);
-                    },
-                  )
-                : const Center(
-                    child: Text("Nenhuma cidade Salva"),
-                  ),
-          ),
+          //Cidades Salvas
           Column(
             children: [
               const Row(
@@ -191,7 +160,42 @@ class _SearchPageState extends State<SearchPage> {
                   Padding(
                     padding: EdgeInsets.only(left: 10),
                     child: Text(
-                      "Cidades Salvas.",
+                      "Cidades Salvas:",
+                      style:
+                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(
+                height: 150,
+                width: 400,
+                child: _searchHistory.isNotEmpty
+                    ? ListView.builder(
+                        scrollDirection: Axis.horizontal,
+                        itemCount: _searchHistory.length,
+                        itemBuilder: (context, int index) {
+                          return cityBox(
+                              context: context,
+                              searchHistory: _searchHistory,
+                              index: index);
+                        },
+                      )
+                    : const Center(
+                        child: Text("Nenhuma cidade Salva"),
+                      ),
+              ),
+            ],
+          ),
+          //Historico de Pesquisa
+          Column(
+            children: [
+              const Row(
+                children: [
+                  Padding(
+                    padding: EdgeInsets.only(left: 10),
+                    child: Text(
+                      "Historico de Pesquisa:",
                       style:
                           TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                     ),
@@ -205,7 +209,9 @@ class _SearchPageState extends State<SearchPage> {
                         itemCount: _searchHistory.length,
                         itemBuilder: (context, int index) {
                           return cityBox(
-                              weatherHistory: _searchHistory, index: index);
+                              context: context,
+                              searchHistory: _searchHistory,
+                              index: index);
                         },
                       )
                     : const Center(
@@ -215,39 +221,6 @@ class _SearchPageState extends State<SearchPage> {
             ],
           ),
         ],
-      ),
-    );
-  }
-
-  Widget cityBox({
-    required List<WeatherModel> weatherHistory,
-    required int index,
-  }) {
-    return Padding(
-      padding: const EdgeInsets.all(10.0),
-      child: Container(
-        height: 80,
-        decoration: BoxDecoration(
-          color: Colors.grey,
-          borderRadius: BorderRadius.circular(15),
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Text(
-                _searchHistory[index].city,
-                style: TextStyle(
-                  color: Theme.of(context).secondaryHeaderColor,
-                  fontSize: 20,
-                  fontWeight: FontWeight.w600,
-                ),
-              ),
-            )
-          ],
-        ),
       ),
     );
   }

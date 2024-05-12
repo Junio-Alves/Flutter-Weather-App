@@ -1,12 +1,14 @@
 import 'dart:convert';
+import 'package:flutter/material.dart';
 import 'package:weather_app2/data/models/weather_model.dart';
 import "package:http/http.dart" as http;
 import 'package:weather_app2/data/utils/constants.dart';
 
-class SearchWeather {
+class SearchWeather extends ChangeNotifier {
   String error = "";
+  final List<WeatherModel> searchResult = [];
 
-  Future getWeather({required String cityname}) async {
+  getWeather({required String cityname}) async {
     error = "";
     try {
       final result = await http.get(
@@ -16,7 +18,7 @@ class SearchWeather {
       if (result.statusCode == 200) {
         final body = jsonDecode(result.body);
         if (body["by"] == "city_name") {
-          return WeatherModel.fromMap(body["results"]);
+          searchResult.add(WeatherModel.fromMap(body["results"]));
         } else if (body["by"] == "default") {
           error = "Cidade não encontrada";
         }
@@ -26,5 +28,6 @@ class SearchWeather {
     } catch (e) {
       error = error.toString();
     }
+    notifyListeners();
   }
 }
