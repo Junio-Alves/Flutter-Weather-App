@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:weather_app2/data/models/weather_model.dart';
 import 'package:weather_app2/data/provider/searchWeather_provider.dart';
 import 'package:weather_app2/data/provider/userData_provider.dart';
 import 'package:weather_app2/data/utils/imageIcon.dart';
+import 'package:weather_app2/pages/widgets/popUpError_widget.dart';
 import 'package:weather_app2/pages/widgets/search_city_widget.dart';
 import 'package:weather_app2/pages/widgets/text_shadow.dart';
 
@@ -23,17 +23,6 @@ class _SearchPageState extends State<SearchPage> {
     final searchWeather = Provider.of<SearchWeather>(context);
     final userData = Provider.of<UserData>(context);
 
-    Future<dynamic> errorPopUpWidget(String error, BuildContext context) {
-      return showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            content: Text(error.toString()),
-          );
-        },
-      );
-    }
-
     searchCity() async {
       await searchWeather.getWeather(cityname: _searchController.text);
       if (searchWeather.error.isEmpty) {
@@ -42,19 +31,6 @@ class _SearchPageState extends State<SearchPage> {
         _searchController.clear();
       } else {
         errorPopUpWidget(searchWeather.error, context);
-      }
-    }
-
-    addFavorite() {
-      bool isFavorite = false;
-      for (WeatherModel weather in userData.favoriteCitys) {
-        if (weather.city == searchWeather.searchResult.first.city) {
-          isFavorite = true;
-        }
-      }
-      if (isFavorite == false) {
-        userData.favoriteCitysAdd(searchWeather.searchResult.first);
-        userData.saveUserFavorite();
       }
     }
 
@@ -79,9 +55,7 @@ class _SearchPageState extends State<SearchPage> {
                       child: TextFormField(
                         controller: _searchController,
                         validator: (value) {
-                          if (value!.isEmpty) {
-                            return "Informe uma cidade";
-                          } else if (value == "") {
+                          if (value!.isEmpty || value == "") {
                             return "Informe uma cidade";
                           }
                           return null;
@@ -178,7 +152,8 @@ class _SearchPageState extends State<SearchPage> {
                                 onPressed: () {
                                   setState(
                                     () {
-                                      addFavorite();
+                                      userData.saveUserFavorite(
+                                          searchWeather.searchResult.first);
                                     },
                                   );
                                 },

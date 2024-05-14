@@ -27,13 +27,21 @@ class UserData extends ChangeNotifier {
     userPrefs.saveUserHistory(_searchHistory);
   }
 
-  saveUserFavorite() {
-    userPrefs.saveUserFavorites(_favoriteCitys);
+  saveUserFavorite(WeatherModel result) {
+    bool isFavorite = false;
+
+    for (WeatherModel weather in _favoriteCitys) {
+      if (weather.city == result.city) {
+        isFavorite = true;
+      }
+    }
+    if (isFavorite == false) {
+      _favoriteCitys.add(result);
+    }
   }
 
   clearFavorites() {
     _favoriteCitys.clear();
-    saveUserFavorite();
   }
 
   clearHistory() {

@@ -6,7 +6,9 @@ import 'package:weather_app2/data/utils/constants.dart';
 
 class SearchWeather extends ChangeNotifier {
   String error = "";
-  final List<WeatherModel> searchResult = [];
+  final List<WeatherModel> _searchResult = [];
+
+  get searchResult => _searchResult;
 
   getWeather({required String cityname}) async {
     error = "";
