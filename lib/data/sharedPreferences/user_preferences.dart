@@ -22,4 +22,50 @@ class UserPreferences {
       return userWeatherJson = {"null": "null"};
     }
   }
+
+  void saveUserHistory(List<WeatherModel> searchHistory) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    List<String> userWeatherJson = [];
+    for (WeatherModel weatherModel in searchHistory) {
+      userWeatherJson.add(jsonEncode(weatherModel.toMap()));
+    }
+    await prefs.setStringList("userHistory", userWeatherJson);
+  }
+
+  Future<List<WeatherModel>> loadHistory() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    final userHistoryJson = prefs.getStringList("userHistory");
+    if (userHistoryJson == null) {
+      return [];
+    } else {
+      List<WeatherModel> userHistory = [];
+      for (String weatherJson in userHistoryJson) {
+        userHistory.add(WeatherModel.fromMap(jsonDecode(weatherJson)));
+      }
+      return userHistory;
+    }
+  }
+
+  void saveUserFavorites(List<WeatherModel> searchHistory) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    List<String> userWeatherJson = [];
+    for (WeatherModel weatherModel in searchHistory) {
+      userWeatherJson.add(jsonEncode(weatherModel.toMap()));
+    }
+    await prefs.setStringList("userFavorites", userWeatherJson);
+  }
+
+  Future<List<WeatherModel>> loadFavorites() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    final userHistoryJson = prefs.getStringList("userFavorites");
+    if (userHistoryJson == null) {
+      return [];
+    } else {
+      List<WeatherModel> userHistory = [];
+      for (String weatherJson in userHistoryJson) {
+        userHistory.add(WeatherModel.fromMap(jsonDecode(weatherJson)));
+      }
+      return userHistory;
+    }
+  }
 }

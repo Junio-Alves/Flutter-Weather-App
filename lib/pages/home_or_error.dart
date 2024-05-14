@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:weather_app2/data/provider/userData_provider.dart';
 import 'package:weather_app2/data/provider/weather_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:weather_app2/pages/loading_page.dart';
@@ -17,6 +18,9 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     final weatherProvider =
         Provider.of<WeatherProvider>(context, listen: false);
+
+    final userData = Provider.of<UserData>(context, listen: false);
+    userData.loadUserData();
 
     weatherProvider.getWeather().then((value) {
       setState(() {

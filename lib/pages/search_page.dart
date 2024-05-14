@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:weather_app2/data/models/weather_model.dart';
-import 'package:weather_app2/data/provider/searchWeather.dart';
+import 'package:weather_app2/data/provider/searchWeather_provider.dart';
+import 'package:weather_app2/data/provider/userData_provider.dart';
 import 'package:weather_app2/data/utils/imageIcon.dart';
 import 'package:weather_app2/pages/widgets/search_city_widget.dart';
 import 'package:weather_app2/pages/widgets/text_shadow.dart';
@@ -16,11 +17,11 @@ class SearchPage extends StatefulWidget {
 class _SearchPageState extends State<SearchPage> {
   final _searchController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
-  final List<WeatherModel> _searchHistory = [];
-  final List<WeatherModel> _favoriteCitys = [];
+
   @override
   Widget build(BuildContext context) {
     final searchWeather = Provider.of<SearchWeather>(context);
+    final userData = Provider.of<UserData>(context);
 
     Future<dynamic> errorPopUpWidget(String error, BuildContext context) {
       return showDialog(
@@ -36,10 +37,24 @@ class _SearchPageState extends State<SearchPage> {
     searchCity() async {
       await searchWeather.getWeather(cityname: _searchController.text);
       if (searchWeather.error.isEmpty) {
-        _searchHistory.add(searchWeather.searchResult.first);
+        userData.searchHistoryAdd(searchWeather.searchResult.first);
+        userData.saveUserHistory();
         _searchController.clear();
       } else {
         errorPopUpWidget(searchWeather.error, context);
+      }
+    }
+
+    addFavorite() {
+      bool isFavorite = false;
+      for (WeatherModel weather in userData.favoriteCitys) {
+        if (weather.city == searchWeather.searchResult.first.city) {
+          isFavorite = true;
+        }
+      }
+      if (isFavorite == false) {
+        userData.favoriteCitysAdd(searchWeather.searchResult.first);
+        userData.saveUserFavorite();
       }
     }
 
@@ -163,19 +178,7 @@ class _SearchPageState extends State<SearchPage> {
                                 onPressed: () {
                                   setState(
                                     () {
-                                      bool isFavorite = false;
-                                      for (WeatherModel weather
-                                          in _favoriteCitys) {
-                                        if (weather.city ==
-                                            searchWeather
-                                                .searchResult.first.city) {
-                                          isFavorite = true;
-                                        }
-                                      }
-                                      if (isFavorite == false) {
-                                        _favoriteCitys.add(
-                                            searchWeather.searchResult.first);
-                                      }
+                                      addFavorite();
                                     },
                                   );
                                 },
@@ -207,14 +210,14 @@ class _SearchPageState extends State<SearchPage> {
                 SizedBox(
                   height: 150,
                   width: 400,
-                  child: _favoriteCitys.isNotEmpty
+                  child: userData.favoriteCitys.isNotEmpty
                       ? ListView.builder(
                           scrollDirection: Axis.horizontal,
-                          itemCount: _favoriteCitys.length,
+                          itemCount: userData.favoriteCitys.length,
                           itemBuilder: (context, int index) {
                             return cityBox(
                                 context: context,
-                                searchHistory: _favoriteCitys,
+                                searchHistory: userData.favoriteCitys,
                                 index: index);
                           },
                         )
@@ -227,9 +230,10 @@ class _SearchPageState extends State<SearchPage> {
             //Historico de Pesquisa
             Column(
               children: [
-                const Row(
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Padding(
+                    const Padding(
                       padding: EdgeInsets.only(left: 10),
                       child: Text(
                         "Historico de Pesquisa:",
@@ -237,17 +241,24 @@ class _SearchPageState extends State<SearchPage> {
                             fontSize: 20, fontWeight: FontWeight.bold),
                       ),
                     ),
+                    IconButton(
+                        onPressed: () {
+                          setState(() {
+                            userData.clearHistory();
+                          });
+                        },
+                        icon: const Icon(Icons.clear))
                   ],
                 ),
                 SizedBox(
-                  height: 300,
-                  child: _searchHistory.isNotEmpty
+                  height: 500,
+                  child: userData.searchHistory.isNotEmpty
                       ? ListView.builder(
-                          itemCount: _searchHistory.length,
+                          itemCount: userData.searchHistory.length,
                           itemBuilder: (context, int index) {
                             return cityBox(
                                 context: context,
-                                searchHistory: _searchHistory,
+                                searchHistory: userData.searchHistory,
                                 index: index);
                           },
                         )

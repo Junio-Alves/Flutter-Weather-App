@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:weather_app2/data/provider/searchWeather.dart';
+import 'package:weather_app2/data/provider/searchWeather_provider.dart';
+import 'package:weather_app2/data/provider/userData_provider.dart';
 import 'package:weather_app2/data/provider/weather_provider.dart';
 import 'package:weather_app2/data/provider/backgroundcolor_provider.dart';
 import 'package:weather_app2/data/utils/appRoutes.dart';
@@ -31,6 +32,9 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: ((context) => SearchWeather()),
+        ),
+        ChangeNotifierProvider(
+          create: ((context) => UserData()),
         ),
       ],
       child: MaterialApp(
