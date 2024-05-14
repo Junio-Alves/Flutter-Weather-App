@@ -170,9 +170,10 @@ class _SearchPageState extends State<SearchPage> {
             //Cidades Salvas
             Column(
               children: [
-                const Row(
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Padding(
+                    const Padding(
                       padding: EdgeInsets.only(left: 10),
                       child: Text(
                         "Cidades Salvas:",
@@ -180,6 +181,15 @@ class _SearchPageState extends State<SearchPage> {
                             fontSize: 20, fontWeight: FontWeight.bold),
                       ),
                     ),
+                    IconButton(
+                        onPressed: () {
+                          setState(
+                            () {
+                              userData.clearFavorites();
+                            },
+                          );
+                        },
+                        icon: const Icon(Icons.clear))
                   ],
                 ),
                 SizedBox(
