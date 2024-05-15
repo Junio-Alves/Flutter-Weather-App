@@ -41,65 +41,86 @@ class _SearchPageState extends State<SearchPage> {
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             const SizedBox(
-              height: 30,
+              height: 40,
             ),
             //Formulario
             Padding(
               padding: const EdgeInsets.all(10.0),
               child: Row(
-                mainAxisSize: MainAxisSize.min,
                 children: [
-                  Expanded(
-                    child: Form(
-                      key: _formKey,
-                      child: TextFormField(
-                        controller: _searchController,
-                        validator: (value) {
-                          if (value!.isEmpty || value == "") {
-                            return "Informe uma cidade";
-                          }
-                          return null;
-                        },
-                        decoration: InputDecoration(
-                          label: const Row(
-                            children: [
-                              Text(
-                                "Buscar uma cidade",
-                                style: TextStyle(fontSize: 20),
-                              ),
-                            ],
-                          ),
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(20),
+                  Container(
+                    height: 60,
+                    width: 390,
+                    decoration: BoxDecoration(
+                      border: Border.all(color: Colors.white, width: 2),
+                      color: Colors.black45,
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Card(
+                          child: IconButton(
+                            onPressed: () {
+                              Navigator.pop(context);
+                            },
+                            icon: const Icon(Icons.arrow_back),
                           ),
                         ),
-                      ),
+                        Expanded(
+                          child: Form(
+                            key: _formKey,
+                            child: TextFormField(
+                              controller: _searchController,
+                              validator: (value) {
+                                if (value!.isEmpty || value == "") {
+                                  return "Informe uma cidade";
+                                }
+                                return null;
+                              },
+                              decoration: const InputDecoration(
+                                focusColor: Colors.white,
+                                label: Row(
+                                  children: [
+                                    Text(
+                                      "Procurar Cidade",
+                                      style: TextStyle(
+                                          fontSize: 20, color: Colors.white),
+                                    ),
+                                  ],
+                                ),
+                                border: InputBorder.none,
+                              ),
+                            ),
+                          ),
+                        ),
+                        //Botão de Pesquisa
+                        SizedBox(
+                          height: 70,
+                          width: 70,
+                          child: Card(
+                            elevation: 4,
+                            color: const Color.fromARGB(255, 58, 134, 60)
+                                .withOpacity(0.9),
+                            child: IconButton(
+                              color: Colors.white,
+                              onPressed: () {
+                                if (_formKey.currentState!.validate()) {
+                                  setState(
+                                    () {
+                                      searchWeather.searchResult.clear();
+                                      searchCity();
+                                    },
+                                  );
+                                }
+                              },
+                              icon: const Icon(Icons.search),
+                            ),
+                          ),
+                        )
+                      ],
                     ),
                   ),
-                  //Botão de Pesquisa
-                  SizedBox(
-                    height: 70,
-                    width: 70,
-                    child: Card(
-                      elevation: 4,
-                      color: const Color.fromARGB(255, 58, 134, 60)
-                          .withOpacity(0.9),
-                      child: IconButton(
-                        color: Colors.white,
-                        onPressed: () {
-                          if (_formKey.currentState!.validate()) {
-                            setState(
-                              () {
-                                searchWeather.searchResult.clear();
-                                searchCity();
-                              },
-                            );
-                          }
-                        },
-                        icon: const Icon(Icons.search),
-                      ),
-                    ),
-                  )
                 ],
               ),
             ),

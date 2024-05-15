@@ -28,23 +28,26 @@ class _OptionPageState extends State<OptionPage> {
 }
 
 optionCard({required String text, required Function navigator}) {
-  return Card(
-    elevation: 3,
-    color: Colors.black26,
-    child: InkWell(
-      onTap: () {
-        navigator;
-      },
-      child: Row(
-        children: [
-          Padding(
-            padding: const EdgeInsets.only(top: 10, bottom: 10, left: 10),
-            child: Text(
-              text,
-              style: const TextStyle(color: Colors.white, fontSize: 20),
+  return Padding(
+    padding: const EdgeInsets.all(8.0),
+    child: Container(
+      decoration: BoxDecoration(
+          color: Colors.black45, borderRadius: BorderRadius.circular(5)),
+      child: InkWell(
+        onTap: () {
+          navigator;
+        },
+        child: Row(
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(top: 10, bottom: 10, left: 10),
+              child: Text(
+                text,
+                style: const TextStyle(color: Colors.white, fontSize: 20),
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     ),
   );

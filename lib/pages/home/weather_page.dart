@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:weather_app2/data/models/weather_model.dart';
 import 'package:weather_app2/data/utils/appRoutes.dart';
 import 'package:weather_app2/pages/widgets/draggable_widget.dart';
@@ -38,6 +39,54 @@ class _WeatherPageState extends State<WeatherPage> {
                     const SizedBox(
                       height: 30,
                     ),
+                    InkWell(
+                      onTap: () {
+                        Navigator.pushNamed(context, AppRoutes.search_page);
+                      },
+                      child: Container(
+                        height: 60,
+                        width: double.infinity,
+                        decoration: BoxDecoration(
+                          border: Border.all(color: Colors.white, width: 2),
+                          color: Colors.black45,
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            const Padding(
+                              padding: EdgeInsets.all(10.0),
+                              child: Icon(
+                                Icons.search,
+                                color: Colors.white,
+                              ),
+                            ),
+                            const Text(
+                              "Procurar Cidade",
+                              style:
+                                  TextStyle(fontSize: 20, color: Colors.white),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(5.0),
+                              child: Card(
+                                color: Colors.white,
+                                child: IconButton(
+                                  onPressed: () {
+                                    Navigator.pushNamed(
+                                        context, AppRoutes.drawer_page,
+                                        arguments: weather);
+                                  },
+                                  icon: const Icon(
+                                    Icons.table_rows_rounded,
+                                    color: Colors.black,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -56,14 +105,6 @@ class _WeatherPageState extends State<WeatherPage> {
                             ),
                           ],
                         ),
-                        IconButton(
-                            onPressed: () {
-                              Navigator.pushNamed(
-                                  context, AppRoutes.drawer_page,
-                                  arguments: weather);
-                            },
-                            color: Colors.white,
-                            icon: const Icon(Icons.table_rows_rounded))
                       ],
                     ),
                     Row(

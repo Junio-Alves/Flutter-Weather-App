@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:weather_app2/data/provider/userData_provider.dart';
 import 'package:weather_app2/data/provider/weather_provider.dart';
 import 'package:provider/provider.dart';
+import 'package:weather_app2/pages/home/weather_page.dart';
 import 'package:weather_app2/pages/loading_page.dart';
-import 'package:weather_app2/pages/tabs_screen.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -38,9 +38,7 @@ class _HomePageState extends State<HomePage> {
           ? const LoadingPage()
           : provider.error.isNotEmpty
               ? getErrorUI(provider.error)
-              : TabScreen(
-                  weather: provider.weathers.first,
-                ),
+              : WeatherPage(weather: provider.weathers.first),
     );
   }
 
