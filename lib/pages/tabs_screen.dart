@@ -31,7 +31,7 @@ class _TabScreenState extends State<TabScreen> {
   @override
   Widget build(BuildContext context) {
     final List<Widget> _telas = [
-      WeatherPage(weather: widget.weather),
+      const WeatherPage(),
       const SearchPage(),
       const OptionPage(),
     ];

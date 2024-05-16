@@ -15,6 +15,11 @@ class WeatherProvider extends ChangeNotifier {
   List<WeatherModel> weathers = [];
   String error = '';
 
+  changeWeather(WeatherModel newWeather) {
+    weathers.first = newWeather;
+    notifyListeners();
+  }
+
   //*Função getWeather faz uma requisição na API, e salva os dados em "weathers"
   Future getWeather() async {
     Map<String, dynamic> userWeather = await userPrefs.loadUserData();

@@ -38,7 +38,7 @@ class _HomePageState extends State<HomePage> {
           ? const LoadingPage()
           : provider.error.isNotEmpty
               ? getErrorUI(provider.error)
-              : WeatherPage(weather: provider.weathers.first),
+              : const WeatherPage(),
     );
   }
 

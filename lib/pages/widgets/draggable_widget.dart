@@ -22,7 +22,7 @@ class _DraggableWidgetState extends State<DraggableWidget> {
       child: DraggableScrollableSheet(
         initialChildSize: 0.25,
         minChildSize: 0.25,
-        maxChildSize: 0.7,
+        maxChildSize: 1,
         builder: (context, ScrollController scrollController) {
           return SingleChildScrollView(
             controller: scrollController,

@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:weather_app2/data/models/weather_model.dart';
+import 'package:provider/provider.dart';
+import 'package:weather_app2/data/provider/weather_provider.dart';
 import 'package:weather_app2/data/utils/appRoutes.dart';
+import 'package:weather_app2/data/utils/background.dart';
+import 'package:weather_app2/data/utils/imageIcon.dart';
 import 'package:weather_app2/pages/widgets/draggable_widget.dart';
 import 'package:weather_app2/pages/widgets/text_shadow.dart';
 
 class WeatherPage extends StatefulWidget {
-  final WeatherModel weather;
-  const WeatherPage({super.key, required this.weather});
+  const WeatherPage({super.key});
 
   @override
   State<WeatherPage> createState() => _WeatherPageState();
@@ -16,15 +17,15 @@ class WeatherPage extends StatefulWidget {
 class _WeatherPageState extends State<WeatherPage> {
   @override
   Widget build(BuildContext context) {
-    WeatherModel weather = widget.weather;
+    final weather = Provider.of<WeatherProvider>(context).weathers.first;
     return Scaffold(
       body: Stack(
         children: [
           Container(
-            decoration: const BoxDecoration(
+            decoration: BoxDecoration(
               image: DecorationImage(
                 fit: BoxFit.cover,
-                image: AssetImage("assets/background/1.png"),
+                image: AssetImage(background(weather.currently)),
               ),
             ),
           ),
@@ -44,8 +45,8 @@ class _WeatherPageState extends State<WeatherPage> {
                         Navigator.pushNamed(context, AppRoutes.search_page);
                       },
                       child: Container(
-                        height: 60,
-                        width: double.infinity,
+                        height: 50,
+                        width: MediaQuery.of(context).size.width * 0.95,
                         decoration: BoxDecoration(
                           border: Border.all(color: Colors.white, width: 2),
                           color: Colors.black45,
@@ -68,8 +69,10 @@ class _WeatherPageState extends State<WeatherPage> {
                             ),
                             Padding(
                               padding: const EdgeInsets.all(5.0),
-                              child: Card(
-                                color: Colors.white,
+                              child: Container(
+                                decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.circular(20)),
                                 child: IconButton(
                                   onPressed: () {
                                     Navigator.pushNamed(
@@ -110,7 +113,7 @@ class _WeatherPageState extends State<WeatherPage> {
                     Row(
                       children: [
                         textshadow(
-                          text: "${weather.description}  ${weather.date}",
+                          text: weather.date,
                           fontsize: 15,
                           color: Theme.of(context).secondaryHeaderColor,
                           fontWeight: FontWeight.bold,
@@ -120,7 +123,24 @@ class _WeatherPageState extends State<WeatherPage> {
                     Padding(
                       padding: const EdgeInsets.only(),
                       child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Image.asset(
+                                imageIcon(weather.currently),
+                                height: 50,
+                                width: 50,
+                              ),
+                              textshadow(
+                                text: weather.description,
+                                fontsize: 20,
+                                color: Theme.of(context).secondaryHeaderColor,
+                                fontWeight: FontWeight.normal,
+                              ),
+                            ],
+                          ),
                           textshadow(
                             text: "${weather.temp}°",
                             fontsize: 90,

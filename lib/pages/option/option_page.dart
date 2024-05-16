@@ -17,6 +17,7 @@ class _OptionPageState extends State<OptionPage> {
       body: Column(
         children: [
           optionCard(text: "Selecionar Linguagem", navigator: () {}),
+          optionCard(text: "Selecionar Tema", navigator: () {}),
           optionCard(text: "Unidade de Temperatura", navigator: () {}),
           optionCard(text: "Unidade de velocidade do vento ", navigator: () {}),
           optionCard(text: "Tipo de Hora", navigator: () {}),
