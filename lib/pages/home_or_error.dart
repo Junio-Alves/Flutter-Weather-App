@@ -22,7 +22,7 @@ class _HomePageState extends State<HomePage> {
     final userData = Provider.of<UserData>(context, listen: false);
     userData.loadUserData();
 
-    weatherProvider.getWeather().then((value) {
+    weatherProvider.getLocalWeather().then((value) {
       setState(() {
         _isLoading = false;
       });

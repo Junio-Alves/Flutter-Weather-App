@@ -17,7 +17,7 @@ class WeatherPage extends StatefulWidget {
 class _WeatherPageState extends State<WeatherPage> {
   @override
   Widget build(BuildContext context) {
-    final weather = Provider.of<WeatherProvider>(context).weather!;
+    final weather = Provider.of<WeatherProvider>(context).userweather!;
     return Scaffold(
       body: Stack(
         children: [

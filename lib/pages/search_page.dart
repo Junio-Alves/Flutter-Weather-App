@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:weather_app2/data/provider/searchWeather_provider.dart';
 import 'package:weather_app2/data/provider/userData_provider.dart';
+import 'package:weather_app2/data/provider/weather_provider.dart';
 import 'package:weather_app2/data/utils/imageIcon.dart';
 import 'package:weather_app2/pages/widgets/popUpError_widget.dart';
 import 'package:weather_app2/pages/widgets/search_city_widget.dart';
@@ -20,17 +20,18 @@ class _SearchPageState extends State<SearchPage> {
 
   @override
   Widget build(BuildContext context) {
-    final searchWeather = Provider.of<SearchWeather>(context);
+    final weatherProvider = Provider.of<WeatherProvider>(context);
     final userData = Provider.of<UserData>(context);
 
     searchCity() async {
-      await searchWeather.getWeather(cityname: _searchController.text);
-      if (searchWeather.error.isEmpty) {
-        userData.searchHistoryAdd(searchWeather.searchResult.first);
+      await weatherProvider.searchWeather(cityname: _searchController.text);
+      if (weatherProvider.error.isEmpty ||
+          weatherProvider.resultWeather != null) {
+        userData.searchHistoryAdd(weatherProvider.resultWeather!);
         userData.saveUserHistory();
         _searchController.clear();
       } else {
-        errorPopUpWidget(searchWeather.error, context);
+        errorPopUpWidget(weatherProvider.error, context);
       }
     }
 
@@ -107,7 +108,7 @@ class _SearchPageState extends State<SearchPage> {
                               if (_formKey.currentState!.validate()) {
                                 setState(
                                   () {
-                                    searchWeather.searchResult.clear();
+                                    weatherProvider.clearSearchResult();
                                     searchCity();
                                   },
                                 );
@@ -123,7 +124,7 @@ class _SearchPageState extends State<SearchPage> {
               ],
             ),
             //Resultado Da Pesquisa
-            if (searchWeather.searchResult.isNotEmpty)
+            if (weatherProvider.resultWeather != null)
               Padding(
                 padding: const EdgeInsets.all(10.0),
                 child: SizedBox(
@@ -136,18 +137,17 @@ class _SearchPageState extends State<SearchPage> {
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           textshadow(
-                              text: searchWeather.searchResult.first.city,
+                              text: weatherProvider.resultWeather!.city,
                               fontsize: 20,
                               color: Colors.black,
                               fontWeight: FontWeight.bold),
                           textshadow(
-                              text:
-                                  searchWeather.searchResult.first.description,
+                              text: weatherProvider.resultWeather!.description,
                               fontsize: 17,
                               color: Colors.black,
                               fontWeight: FontWeight.normal),
                           textshadow(
-                              text: "${searchWeather.searchResult.first.temp}º",
+                              text: "${weatherProvider.resultWeather!.temp}º",
                               fontsize: 50,
                               color: Colors.black,
                               fontWeight: FontWeight.normal),
@@ -159,7 +159,7 @@ class _SearchPageState extends State<SearchPage> {
                             children: [
                               Image.asset(
                                 imageIcon(
-                                    searchWeather.searchResult.first.currently),
+                                    weatherProvider.resultWeather!.currently),
                                 height: 100,
                                 width: 100,
                               ),
@@ -172,7 +172,7 @@ class _SearchPageState extends State<SearchPage> {
                                   setState(
                                     () {
                                       userData.saveUserFavorite(
-                                          searchWeather.searchResult.first);
+                                          weatherProvider.resultWeather!);
                                     },
                                   );
                                 },

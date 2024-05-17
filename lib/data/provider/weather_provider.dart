@@ -1,59 +1,72 @@
 import 'dart:convert';
-import 'dart:developer';
 import 'package:flutter/foundation.dart';
 import 'package:weather_app2/data/utils/constants.dart';
-import 'package:weather_app2/data/sharedPreferences/user_preferences.dart';
 import '../controller/user_geolocator.dart';
 import 'package:weather_app2/data/models/weather_model.dart';
 import "package:http/http.dart" as http;
 
 class WeatherProvider extends ChangeNotifier {
   final position = GetGeoLocation();
-  final userPrefs = UserPreferences();
-  WeatherModel? _weather;
+  WeatherModel? _localUserWeather;
+  WeatherModel? _searchWeather;
   String error = '';
 
-  get weather => _weather;
+  get userweather => _localUserWeather;
+
+  WeatherModel? get resultWeather => _searchWeather;
 
   changeWeather(WeatherModel newWeather) {
-    _weather = newWeather;
+    _localUserWeather = newWeather;
     notifyListeners();
   }
 
   //*Função getWeather faz uma requisição na API, e salva os dados em "weathers"
-  Future getWeather() async {
-    Map<String, dynamic> userWeather = await userPrefs.loadUserData();
-    log(userWeather.toString());
-
-    //*Verifica se existe algum dado salvo no dispostivo, caso o valor neja null
-    // faz uma nova requisição na API.
-    //*Verifica tambem se ja passou 24hrs desde a primeira requisição na API,
-    // caso sim, faz uma nova requisição na API.
-
-    if (weather == null) {
-      try {
-        await position.getPosition();
-        final result = await http.get(
-          Uri.parse(
-            Constants.api(lat: position.lat, long: position.long),
-          ),
-        );
-        if (result.statusCode == 200) {
-          final body = jsonDecode(result.body);
-          _weather = WeatherModel.fromMap(body['results']);
-          userPrefs.saveUserLocal(WeatherModel.fromMap(body['results']));
-        } else {
-          error = result.statusCode.toString();
-          throw Exception("Erro na requisição: $error");
-        }
-      } catch (e) {
-        error = e.toString();
+  Future getLocalWeather() async {
+    try {
+      await position.getPosition();
+      final result = await http.get(
+        Uri.parse(
+          Constants.api(lat: position.lat, long: position.long),
+        ),
+      );
+      if (result.statusCode == 200) {
+        final body = jsonDecode(result.body);
+        _localUserWeather = WeatherModel.fromMap(body['results']);
+      } else {
+        error = result.statusCode.toString();
+        throw Exception("Erro na requisição: $error");
       }
+    } catch (e) {
+      error = e.toString();
     }
-    //Caso tenha algum dado salvo no disposito,utiliza os dados salvos.
-    else {
-      _weather = WeatherModel.fromMap(userWeather);
+
+    notifyListeners();
+  }
+
+  searchWeather({required String cityname}) async {
+    error = "";
+    try {
+      final result = await http.get(
+        Uri.parse(
+            "https://api.hgbrasil.com/weather?key=${Constants.apiKey}&city_name=$cityname"),
+      );
+      if (result.statusCode == 200) {
+        final body = jsonDecode(result.body);
+        if (body["by"] == "city_name") {
+          _searchWeather = WeatherModel.fromMap(body["results"]);
+        } else if (body["by"] == "default") {
+          error = "Cidade não encontrada";
+        }
+      } else {
+        error = "Erro na requisição da API";
+      }
+    } catch (e) {
+      error = error.toString();
     }
     notifyListeners();
+  }
+
+  clearSearchResult() {
+    _searchWeather = null;
   }
 }
