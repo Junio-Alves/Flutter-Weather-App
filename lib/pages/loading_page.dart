@@ -6,22 +6,33 @@ class LoadingPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Image.asset(
-              "assets/icons/loading_icon.gif",
-              scale: 0.7,
-            ),
-            const Text(
-              "Carregando...",
-              style: TextStyle(fontSize: 20),
-            ),
-          ],
+      body: Stack(children: [
+        Container(
+          decoration: const BoxDecoration(
+              image: DecorationImage(
+                  fit: BoxFit.cover,
+                  image: AssetImage("assets/background/loading.jpg"))),
         ),
-      ),
+        Center(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Image.asset(
+                "assets/icons/solid-white/clear.png",
+                scale: 1,
+              ),
+              const Text(
+                "My Weather App",
+                style: TextStyle(
+                    fontSize: 40,
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold),
+              ),
+            ],
+          ),
+        ),
+      ]),
     );
   }
 }

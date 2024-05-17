@@ -17,7 +17,7 @@ class WeatherPage extends StatefulWidget {
 class _WeatherPageState extends State<WeatherPage> {
   @override
   Widget build(BuildContext context) {
-    final weather = Provider.of<WeatherProvider>(context).weathers.first;
+    final weather = Provider.of<WeatherProvider>(context).weather!;
     return Scaffold(
       body: Stack(
         children: [
@@ -149,17 +149,6 @@ class _WeatherPageState extends State<WeatherPage> {
                           ),
                         ],
                       ),
-                    ),
-                    const Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        //ICONE DO TEMPO ATUAL
-                        //Image.asset(
-                        //  imageIcon(weather.currently),
-                        //  height: 200,
-                        //  width: 200,
-                        //)
-                      ],
                     ),
                   ],
                 ),

@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'dart:developer';
 import 'package:flutter/foundation.dart';
-import 'package:intl/intl.dart';
 import 'package:weather_app2/data/utils/constants.dart';
 import 'package:weather_app2/data/sharedPreferences/user_preferences.dart';
 import '../controller/user_geolocator.dart';
@@ -11,12 +10,13 @@ import "package:http/http.dart" as http;
 class WeatherProvider extends ChangeNotifier {
   final position = GetGeoLocation();
   final userPrefs = UserPreferences();
-  final _currentDate = DateFormat("dd/MM/yyyy").format(DateTime.now());
-  List<WeatherModel> weathers = [];
+  WeatherModel? _weather;
   String error = '';
 
+  get weather => _weather;
+
   changeWeather(WeatherModel newWeather) {
-    weathers.first = newWeather;
+    _weather = newWeather;
     notifyListeners();
   }
 
@@ -24,14 +24,13 @@ class WeatherProvider extends ChangeNotifier {
   Future getWeather() async {
     Map<String, dynamic> userWeather = await userPrefs.loadUserData();
     log(userWeather.toString());
-    log(_currentDate);
 
     //*Verifica se existe algum dado salvo no dispostivo, caso o valor neja null
     // faz uma nova requisição na API.
     //*Verifica tambem se ja passou 24hrs desde a primeira requisição na API,
     // caso sim, faz uma nova requisição na API.
 
-    if (weathers.isEmpty) {
+    if (weather == null) {
       try {
         await position.getPosition();
         final result = await http.get(
@@ -41,7 +40,7 @@ class WeatherProvider extends ChangeNotifier {
         );
         if (result.statusCode == 200) {
           final body = jsonDecode(result.body);
-          weathers.add(WeatherModel.fromMap(body['results']));
+          _weather = WeatherModel.fromMap(body['results']);
           userPrefs.saveUserLocal(WeatherModel.fromMap(body['results']));
         } else {
           error = result.statusCode.toString();
@@ -53,7 +52,7 @@ class WeatherProvider extends ChangeNotifier {
     }
     //Caso tenha algum dado salvo no disposito,utiliza os dados salvos.
     else {
-      weathers.add(WeatherModel.fromMap(userWeather));
+      _weather = WeatherModel.fromMap(userWeather);
     }
     notifyListeners();
   }

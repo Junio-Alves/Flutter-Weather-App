@@ -29,16 +29,19 @@ class _OptionPageState extends State<OptionPage> {
 }
 
 optionCard({required String text, required Function navigator}) {
+  bool show = false;
   return Padding(
     padding: const EdgeInsets.all(8.0),
     child: Container(
+      height: 50,
+      width: double.infinity,
       decoration: BoxDecoration(
           color: Colors.black45, borderRadius: BorderRadius.circular(5)),
       child: InkWell(
         onTap: () {
-          navigator;
+          show = !show;
         },
-        child: Row(
+        child: Column(
           children: [
             Padding(
               padding: const EdgeInsets.only(top: 10, bottom: 10, left: 10),
@@ -47,6 +50,12 @@ optionCard({required String text, required Function navigator}) {
                 style: const TextStyle(color: Colors.white, fontSize: 20),
               ),
             ),
+            show == true
+                ? Container(
+                    height: 100,
+                    child: Text("123"),
+                  )
+                : const SizedBox()
           ],
         ),
       ),
