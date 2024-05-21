@@ -11,16 +11,17 @@ class WeatherProvider extends ChangeNotifier {
   WeatherModel? _searchWeather;
   String error = '';
 
-  get userweather => _localUserWeather;
+  WeatherModel? get userweather => _localUserWeather;
 
   WeatherModel? get resultWeather => _searchWeather;
 
+  //Altera o clima do usuário por um novo
   changeWeather(WeatherModel newWeather) {
     _localUserWeather = newWeather;
     notifyListeners();
   }
 
-  //*Função getWeather faz uma requisição na API, e salva os dados em "weathers"
+  //Busca um clima com base na geolocalização do usuário.
   Future getLocalWeather() async {
     try {
       await position.getPosition();
@@ -43,6 +44,7 @@ class WeatherProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  //Busca um clima com base no nome da cidade fornecido
   searchWeather({required String cityname}) async {
     error = "";
     try {

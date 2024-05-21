@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:weather_app2/pages/widgets/text_shadow.dart';
+import 'package:weather_app2/data/utils/imageIcon.dart';
 
 class ForecastPage extends StatelessWidget {
   const ForecastPage({super.key});
@@ -9,38 +9,120 @@ class ForecastPage extends StatelessWidget {
     final forecast =
         ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
     return Scaffold(
-      appBar: PreferredSize(
-        preferredSize: const Size.fromHeight(100),
-        child: AppBar(
-          flexibleSpace: Container(
-            decoration: const BoxDecoration(
-              image: DecorationImage(
-                  image: AssetImage("assets/background/3.jpg"),
-                  fit: BoxFit.cover),
+      appBar: AppBar(
+          title: Text(
+        " ${forecast["weekday"]} ${forecast["date"]}",
+        style: const TextStyle(fontSize: 20),
+      )),
+      body: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: Image.asset(
+                imageIcon(forecast["condition"]),
+                scale: 0.7,
+                height: 150,
+                width: 150,
+              ),
             ),
-            child: const Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
+            Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [],
-                ),
+                forecastCard(
+                    text1: "Max: ",
+                    text2: "${forecast["max"].toString()}ºC",
+                    width: 190,
+                    fontsize: 20,
+                    icon: Icons.arrow_upward_outlined,
+                    iconColor: Colors.green),
+                forecastCard(
+                    text1: "Min: ",
+                    text2: "${forecast["min"].toString()}ºC",
+                    width: 190,
+                    fontsize: 20,
+                    icon: Icons.arrow_downward,
+                    iconColor: Colors.red),
               ],
             ),
-          ),
-          backgroundColor: Colors.transparent,
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                forecastCard(
+                    text1: "Nebulosidade:",
+                    text2: "${forecast["cloudiness"].toString()}%",
+                    width: 190,
+                    fontsize: 17,
+                    icon: Icons.cloud,
+                    iconColor: Colors.black),
+                forecastCard(
+                    text1: "Chuva",
+                    text2: "${forecast["rain"].toString()}mm",
+                    width: 190,
+                    fontsize: 17,
+                    icon: Icons.storm,
+                    iconColor: Colors.black),
+              ],
+            ),
+            forecastCard(
+                text1: "Probabilidade de Chuva:",
+                text2: "${forecast["rain_probability"]}%",
+                width: 390,
+                fontsize: 17,
+                icon: Icons.ac_unit,
+                iconColor: Colors.black),
+            forecastCard(
+                text1: "Velocidade dos ventos:",
+                text2: "${forecast["wind_speedy"]}",
+                width: 390,
+                fontsize: 17,
+                icon: Icons.speed,
+                iconColor: Colors.black),
+            forecastCard(
+                text1: "Descrição:",
+                text2: "${forecast["description"]}",
+                width: 390,
+                fontsize: 17,
+                icon: Icons.mark_chat_read_sharp,
+                iconColor: Colors.black),
+          ],
         ),
       ),
-      body: Column(
-        children: [
-          textshadow(
-              text: forecast["condition"],
-              fontsize: 30,
-              color: Colors.black,
-              fontWeight: FontWeight.normal)
-        ],
+    );
+  }
+
+  Widget forecastCard(
+      {required String text1,
+      required String text2,
+      required double width,
+      required double fontsize,
+      required IconData icon,
+      required Color iconColor}) {
+    return Padding(
+      padding: const EdgeInsets.all(5.0),
+      child: Container(
+        height: 70,
+        width: width,
+        decoration: BoxDecoration(
+          color: Colors.black45,
+          borderRadius: BorderRadius.circular(20),
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Icon(
+              icon,
+              color: iconColor,
+            ),
+            Text(
+              "$text1 $text2",
+              style: TextStyle(fontSize: fontsize, color: Colors.white),
+            )
+          ],
+        ),
       ),
     );
   }

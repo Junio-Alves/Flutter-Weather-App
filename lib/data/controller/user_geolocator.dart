@@ -2,11 +2,14 @@ import 'package:geolocator/geolocator.dart';
 
 class GetGeoLocation {
   //Latitude
-  double lat = 0.0;
+  double _lat = 0.0;
   //Longitude
-  double long = 0.0;
+  double _long = 0.0;
   //Erros
   String error = '';
+
+  get lat => _lat;
+  get long => _long;
 
   GetGeoLocation() {
     getPosition();
@@ -17,8 +20,8 @@ class GetGeoLocation {
     try {
       //pega a localização atual do usuário.
       Position position = await _currentPosition();
-      lat = position.latitude;
-      long = position.longitude;
+      _lat = position.latitude;
+      _long = position.longitude;
     }
     //se não for possivel, pega o erro.
     catch (e) {

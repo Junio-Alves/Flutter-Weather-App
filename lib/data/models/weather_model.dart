@@ -18,7 +18,7 @@ class WeatherModel {
       required this.humidity,
       required this.forecast});
 
-  factory WeatherModel.fromMap(Map<String, dynamic> map) {
+  factory WeatherModel.fromMap(Map<dynamic, dynamic> map) {
     return WeatherModel(
       temp: map['temp'].toString(),
       date: map['date'].toString(),
