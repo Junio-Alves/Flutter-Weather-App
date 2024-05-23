@@ -68,4 +68,15 @@ class UserPreferences {
       return userHistory;
     }
   }
+
+  saveTemperature(String userTemperature) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setString("userTemperature", userTemperature);
+  }
+
+  loadTemperature() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    final userTemperature = await prefs.getString("userTemperature");
+    return userTemperature;
+  }
 }

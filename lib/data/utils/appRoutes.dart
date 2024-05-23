@@ -7,4 +7,8 @@ class AppRoutes {
   static const feedback_page = "/feedback_page";
   static const about_page = "/about_page";
   static const search_page_detail = "/search_page_detail";
+  static const language_page = "/language_page";
+  static const speed_unit = "/speed_unit";
+  static const temperature_unit = "/temperature_unit";
+  static const theme_page = "/theme_page";
 }

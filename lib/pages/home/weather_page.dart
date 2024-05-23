@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:weather_app2/data/provider/userData_provider.dart';
 import 'package:weather_app2/data/provider/weather_provider.dart';
 import 'package:weather_app2/data/utils/appRoutes.dart';
 import 'package:weather_app2/data/utils/background.dart';
@@ -18,6 +19,7 @@ class _WeatherPageState extends State<WeatherPage> {
   @override
   Widget build(BuildContext context) {
     final weather = Provider.of<WeatherProvider>(context).userweather!;
+    final userData = Provider.of<UserData>(context);
     return Scaffold(
       body: Stack(
         children: [
@@ -142,7 +144,8 @@ class _WeatherPageState extends State<WeatherPage> {
                             ],
                           ),
                           textshadow(
-                            text: "${weather.temp}°",
+                            text:
+                                userData.getConvertedTemperature(weather.temp),
                             fontsize: 90,
                             color: Theme.of(context).secondaryHeaderColor,
                             fontWeight: FontWeight.normal,

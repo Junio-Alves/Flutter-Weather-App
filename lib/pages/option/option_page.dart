@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:weather_app2/data/utils/appRoutes.dart';
 
 class OptionPage extends StatefulWidget {
   const OptionPage({super.key});
@@ -16,20 +18,40 @@ class _OptionPageState extends State<OptionPage> {
       ),
       body: Column(
         children: [
-          optionCard(text: "Selecionar Linguagem", navigator: () {}),
-          optionCard(text: "Selecionar Tema", navigator: () {}),
-          optionCard(text: "Unidade de Temperatura", navigator: () {}),
-          optionCard(text: "Unidade de velocidade do vento ", navigator: () {}),
-          optionCard(text: "Tipo de Hora", navigator: () {}),
-          optionCard(text: "Notificações", navigator: () {}),
+          optionCard(
+              text: "Selecionar Linguagem",
+              context: context,
+              route: AppRoutes.language_page),
+          optionCard(
+              text: "Selecionar Tema",
+              context: context,
+              route: AppRoutes.theme_page),
+          optionCard(
+              text: "Unidade de Temperatura",
+              context: context,
+              route: AppRoutes.temperature_unit),
+          optionCard(
+              text: "Unidade de velocidade do vento ",
+              context: context,
+              route: AppRoutes.speed_unit),
+          optionCard(
+              text: "Tipo de Hora",
+              context: context,
+              route: AppRoutes.speed_unit),
+          optionCard(
+              text: "Notificações",
+              context: context,
+              route: AppRoutes.speed_unit),
         ],
       ),
     );
   }
 }
 
-optionCard({required String text, required Function navigator}) {
-  bool show = false;
+optionCard(
+    {required String text,
+    required BuildContext context,
+    required String route}) {
   return Padding(
     padding: const EdgeInsets.all(8.0),
     child: Container(
@@ -39,7 +61,7 @@ optionCard({required String text, required Function navigator}) {
           color: Colors.black45, borderRadius: BorderRadius.circular(5)),
       child: InkWell(
         onTap: () {
-          show = !show;
+          Navigator.pushNamed(context, route);
         },
         child: Column(
           children: [
@@ -50,12 +72,6 @@ optionCard({required String text, required Function navigator}) {
                 style: const TextStyle(color: Colors.white, fontSize: 20),
               ),
             ),
-            show == true
-                ? Container(
-                    height: 100,
-                    child: Text("123"),
-                  )
-                : const SizedBox()
           ],
         ),
       ),
