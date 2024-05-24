@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:weather_app2/data/models/weather_model.dart';
+import 'package:weather_app2/data/provider/userData_provider.dart';
 import 'package:weather_app2/data/utils/appRoutes.dart';
 import 'package:weather_app2/pages/widgets/text_shadow.dart';
 
@@ -9,6 +11,7 @@ class AppDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final weather = ModalRoute.of(context)!.settings.arguments as WeatherModel;
+    final userData = Provider.of<UserData>(context);
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(100),
@@ -28,14 +31,14 @@ class AppDrawer extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     textshadow(
-                      text: "${weather.temp}°",
-                      fontsize: 50,
+                      text: userData.getConvertedTemperature(weather.temp),
+                      fontsize: 40,
                       color: Theme.of(context).secondaryHeaderColor,
                       fontWeight: FontWeight.normal,
                     ),
                     textshadow(
-                      text: weather.city,
-                      fontsize: 30,
+                      text: " ${weather.city}",
+                      fontsize: 20,
                       color: Theme.of(context).secondaryHeaderColor,
                       fontWeight: FontWeight.normal,
                     ),

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:weather_app2/data/provider/userData_provider.dart';
 import 'package:weather_app2/data/utils/imageIcon.dart';
 
 class ForecastPage extends StatelessWidget {
@@ -8,6 +10,7 @@ class ForecastPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final forecast =
         ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
+    final userData = Provider.of<UserData>(context);
     return Scaffold(
       appBar: AppBar(
           title: Text(
@@ -75,7 +78,7 @@ class ForecastPage extends StatelessWidget {
                 iconColor: Colors.black),
             forecastCard(
                 text1: "Velocidade dos ventos:",
-                text2: "${forecast["wind_speedy"]}",
+                text2: userData.getConvertedSpeed(forecast["wind_speedy"]),
                 width: 390,
                 fontsize: 17,
                 icon: Icons.speed,

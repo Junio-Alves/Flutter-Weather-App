@@ -39,6 +39,16 @@ class _TemperatureUnitPageState extends State<TemperatureUnitPage> {
               });
             },
           ),
+          RadioListTile(
+            title: const Text("Kelvin"),
+            value: "Kelvin",
+            groupValue: userData.selectedTemperature,
+            onChanged: (value) {
+              setState(() {
+                userData.updateUserTemperature(value.toString());
+              });
+            },
+          ),
         ],
       ),
     );

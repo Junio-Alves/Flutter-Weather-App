@@ -146,7 +146,7 @@ class _WeatherPageState extends State<WeatherPage> {
                           textshadow(
                             text:
                                 userData.getConvertedTemperature(weather.temp),
-                            fontsize: 90,
+                            fontsize: 40,
                             color: Theme.of(context).secondaryHeaderColor,
                             fontWeight: FontWeight.normal,
                           ),

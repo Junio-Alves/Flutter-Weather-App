@@ -76,7 +76,18 @@ class UserPreferences {
 
   loadTemperature() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    final userTemperature = await prefs.getString("userTemperature");
+    final userTemperature = prefs.getString("userTemperature");
     return userTemperature;
+  }
+
+  saveSpeed(String userSpeed) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setString("userSpeed", userSpeed);
+  }
+
+  loadSpeed() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    final userSpeed = prefs.getString("userSpeed");
+    return userSpeed;
   }
 }
