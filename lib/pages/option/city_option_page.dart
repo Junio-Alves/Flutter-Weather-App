@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:weather_app2/data/provider/userData_provider.dart';
 import 'package:weather_app2/data/provider/weather_provider.dart';
 import 'package:weather_app2/data/utils/appRoutes.dart';
+import 'package:weather_app2/pages/widgets/popUpError_widget.dart';
 
 class CityOptionPage extends StatefulWidget {
   const CityOptionPage({super.key});
@@ -19,6 +20,41 @@ class _CityOptionPageState extends State<CityOptionPage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text("City Option Page"),
+        leading: IconButton(
+            onPressed: () {
+              if (userData.useCurrentLocation == false &&
+                      userData.customCity == null ||
+                  userData.customCity == "") {
+                showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return AlertDialog(
+                      content: const Text(
+                          "Deseja Realmente sair? Nenhuma cidade selecionada!"),
+                      actions: [
+                        TextButton(
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                          child: const Text("Cancelar"),
+                        ),
+                        TextButton(
+                          onPressed: () {
+                            Navigator.popAndPushNamed(
+                                context, AppRoutes.optionPage);
+                            userData.setCurrentLocation(true);
+                          },
+                          child: const Text("Ok"),
+                        ),
+                      ],
+                    );
+                  },
+                );
+              } else {
+                Navigator.pop(context);
+              }
+            },
+            icon: const Icon(Icons.arrow_back)),
       ),
       body: Column(
         children: [
