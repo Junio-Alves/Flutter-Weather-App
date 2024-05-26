@@ -57,7 +57,7 @@ class _DraggableWidgetState extends State<DraggableWidget> {
                                   onTap: () {
                                     Navigator.pushNamed(
                                       context,
-                                      AppRoutes.forecast_page,
+                                      AppRoutes.forecastPage,
                                       arguments: weather.forecast[index],
                                     );
                                   },

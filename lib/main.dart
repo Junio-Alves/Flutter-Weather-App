@@ -16,6 +16,7 @@ import 'package:weather_app2/pages/option/speed_unit.dart';
 import 'package:weather_app2/pages/option/temperature_unit.dart';
 import 'package:weather_app2/pages/option/theme_page.dart';
 import 'package:weather_app2/pages/search_page.dart';
+import 'package:weather_app2/pages/select_page.dart';
 
 void main() async {
   await Hive.initFlutter();
@@ -43,17 +44,18 @@ class MyApp extends StatelessWidget {
             secondaryHeaderColor: Colors.white),
         debugShowCheckedModeBanner: false,
         routes: {
+          AppRoutes.selectPage: (context) => const SelectPage(),
           AppRoutes.home: (context) => const HomePage(),
-          AppRoutes.option_page: (context) => const OptionPage(),
-          AppRoutes.search_page: (context) => const SearchPage(),
-          AppRoutes.forecast_page: (context) => const ForecastPage(),
-          AppRoutes.drawer_page: (context) => const AppDrawer(),
-          AppRoutes.feedback_page: (context) => const FeedbackPage(),
-          AppRoutes.about_page: (context) => const AboutPage(),
-          AppRoutes.language_page: (context) => const LanguagePage(),
-          AppRoutes.speed_unit: (context) => const SpeedUnitPage(),
-          AppRoutes.temperature_unit: (context) => const TemperatureUnitPage(),
-          AppRoutes.theme_page: (context) => const ThemePage(),
+          AppRoutes.optionPage: (context) => const OptionPage(),
+          AppRoutes.searchPage: (context) => const SearchPage(),
+          AppRoutes.forecastPage: (context) => const ForecastPage(),
+          AppRoutes.drawerPage: (context) => const AppDrawer(),
+          AppRoutes.feedbackPage: (context) => const FeedbackPage(),
+          AppRoutes.aboutPage: (context) => const AboutPage(),
+          AppRoutes.languagePage: (context) => const LanguagePage(),
+          AppRoutes.speedUnit: (context) => const SpeedUnitPage(),
+          AppRoutes.temperatureUnit: (context) => const TemperatureUnitPage(),
+          AppRoutes.themePage: (context) => const ThemePage(),
         },
       ),
     );

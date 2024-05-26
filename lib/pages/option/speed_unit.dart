@@ -22,7 +22,7 @@ class _SpeedUnitPageState extends State<SpeedUnitPage> {
           RadioListTile(
             title: const Text("Km/h"),
             value: "Km/h",
-            groupValue: userData.selectedTemperature,
+            groupValue: userData.selectedSpeed,
             onChanged: (value) {
               setState(() {
                 userData.updateUserSpeed(value.toString());
@@ -32,7 +32,7 @@ class _SpeedUnitPageState extends State<SpeedUnitPage> {
           RadioListTile(
             title: const Text("Mp/h"),
             value: "Mp/h",
-            groupValue: userData.selectedTemperature,
+            groupValue: userData.selectedSpeed,
             onChanged: (value) {
               setState(() {
                 userData.updateUserSpeed(value.toString());
@@ -42,7 +42,7 @@ class _SpeedUnitPageState extends State<SpeedUnitPage> {
           RadioListTile(
             title: const Text("M/s"),
             value: "M/s",
-            groupValue: userData.selectedTemperature,
+            groupValue: userData.selectedSpeed,
             onChanged: (value) {
               setState(() {
                 userData.updateUserSpeed(value.toString());

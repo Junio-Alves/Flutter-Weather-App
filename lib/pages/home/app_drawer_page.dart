@@ -56,21 +56,21 @@ class AppDrawer extends StatelessWidget {
             leading: const Icon(Icons.announcement_outlined),
             title: const Text("Feedback"),
             onTap: () {
-              Navigator.pushNamed(context, AppRoutes.feedback_page);
+              Navigator.pushNamed(context, AppRoutes.feedbackPage);
             },
           ),
           ListTile(
             leading: const Icon(Icons.settings),
             title: const Text("Configurações"),
             onTap: () {
-              Navigator.pushNamed(context, AppRoutes.option_page);
+              Navigator.pushNamed(context, AppRoutes.optionPage);
             },
           ),
           ListTile(
             leading: const Icon(Icons.question_mark),
             title: const Text("Sobre"),
             onTap: () {
-              Navigator.pushNamed(context, AppRoutes.about_page);
+              Navigator.pushNamed(context, AppRoutes.aboutPage);
             },
           )
         ],

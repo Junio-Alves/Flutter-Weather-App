@@ -90,4 +90,35 @@ class UserPreferences {
     final userSpeed = prefs.getString("userSpeed");
     return userSpeed;
   }
+
+  loadIsFirstLogin() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.getBool("isFirstLogin");
+  }
+
+  isFirstLogin(bool isFirtsLogin) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setBool("isFirstLogin", isFirtsLogin);
+    return prefs.getBool("isFirstLogin");
+  }
+
+  saveCustomCity(String customCity) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setString("customCity", customCity);
+  }
+
+  loadCustomCity() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.getString("customCity");
+  }
+
+  saveCurrentLocation(bool currentLocation) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setBool("currentLocation", currentLocation);
+  }
+
+  loadCurrentLocation() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.getBool("currentLocation");
+  }
 }

@@ -44,7 +44,7 @@ class _WeatherPageState extends State<WeatherPage> {
                     ),
                     InkWell(
                       onTap: () {
-                        Navigator.pushNamed(context, AppRoutes.search_page);
+                        Navigator.pushNamed(context, AppRoutes.searchPage);
                       },
                       child: Container(
                         height: 50,
@@ -78,7 +78,7 @@ class _WeatherPageState extends State<WeatherPage> {
                                 child: IconButton(
                                   onPressed: () {
                                     Navigator.pushNamed(
-                                        context, AppRoutes.drawer_page,
+                                        context, AppRoutes.drawerPage,
                                         arguments: weather);
                                   },
                                   icon: const Icon(

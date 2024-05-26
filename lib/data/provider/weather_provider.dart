@@ -45,7 +45,7 @@ class WeatherProvider extends ChangeNotifier {
   }
 
   //Busca um clima com base no nome da cidade fornecido
-  searchWeather({required String cityname}) async {
+  Future searchWeather({required String cityname}) async {
     error = "";
     try {
       final result = await http.get(

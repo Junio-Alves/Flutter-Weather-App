@@ -21,27 +21,27 @@ class _OptionPageState extends State<OptionPage> {
           optionCard(
               text: "Selecionar Linguagem",
               context: context,
-              route: AppRoutes.language_page),
+              route: AppRoutes.languagePage),
           optionCard(
               text: "Selecionar Tema",
               context: context,
-              route: AppRoutes.theme_page),
+              route: AppRoutes.themePage),
           optionCard(
               text: "Unidade de Temperatura",
               context: context,
-              route: AppRoutes.temperature_unit),
+              route: AppRoutes.temperatureUnit),
           optionCard(
               text: "Unidade de velocidade do vento ",
               context: context,
-              route: AppRoutes.speed_unit),
+              route: AppRoutes.speedUnit),
           optionCard(
               text: "Tipo de Hora",
               context: context,
-              route: AppRoutes.speed_unit),
+              route: AppRoutes.speedUnit),
           optionCard(
               text: "Notificações",
               context: context,
-              route: AppRoutes.speed_unit),
+              route: AppRoutes.speedUnit),
         ],
       ),
     );

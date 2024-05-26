@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:weather_app2/data/provider/userData_provider.dart';
 import 'package:weather_app2/data/provider/weather_provider.dart';
 import 'package:provider/provider.dart';
+import 'package:weather_app2/data/utils/appRoutes.dart';
 import 'package:weather_app2/pages/home/weather_page.dart';
 import 'package:weather_app2/pages/loading_page.dart';
 
@@ -20,13 +21,27 @@ class _HomePageState extends State<HomePage> {
         Provider.of<WeatherProvider>(context, listen: false);
 
     final userData = Provider.of<UserData>(context, listen: false);
-    userData.loadUserData();
-
-    weatherProvider.getLocalWeather().then((value) {
-      setState(() {
-        _isLoading = false;
-      });
+    userData.loadUserData().then((value) {
+      if (userData.isFirstLogin) {
+        Navigator.pushReplacementNamed(context, AppRoutes.selectPage);
+      } else if (userData.useCurrentLocation) {
+        weatherProvider.getLocalWeather().then((value) {
+          setState(() {
+            _isLoading = false;
+          });
+        });
+      } else {
+        weatherProvider
+            .searchWeather(cityname: userData.customCity)
+            .then((value) {
+          weatherProvider.changeWeather(weatherProvider.resultWeather!);
+          setState(() {
+            _isLoading = false;
+          });
+        });
+      }
     });
+
     super.initState();
   }
 

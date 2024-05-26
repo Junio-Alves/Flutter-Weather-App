@@ -8,14 +8,22 @@ class UserData extends ChangeNotifier {
   List<WeatherModel> _favoriteCitys = [];
   String? _selectedTemperature;
   String? _selectedSpeed;
-  //final bool _isFirstLogin = true;
+  bool? _isFirstLogin = true;
+  String? _customCity;
+  bool? _useCurrentLocation;
 
   get selectedTemperature => _selectedTemperature;
   get searchHistory => _searchHistory.reversed.toList();
   get favoriteCitys => _favoriteCitys;
   get selectedSpeed => _selectedSpeed;
+  get isFirstLogin => _isFirstLogin;
+  get customCity => _customCity;
+  get useCurrentLocation => _useCurrentLocation;
 
-  loadUserData() async {
+  Future<void> loadUserData() async {
+    _customCity = await userPrefs.loadCustomCity() ?? "";
+    _useCurrentLocation = await userPrefs.loadCurrentLocation() ?? true;
+    _isFirstLogin = await userPrefs.loadIsFirstLogin() ?? true;
     _searchHistory = await userPrefs.loadHistory();
     _favoriteCitys = await userPrefs.loadFavorites();
     _selectedTemperature = await userPrefs.loadTemperature() ?? "Celsius";
@@ -43,12 +51,14 @@ class UserData extends ChangeNotifier {
   }
 
   String getConvertedSpeed(String userSpeed) {
-    final userSpeedConverted = double.parse(userSpeed.replaceAll(" km/h", ""));
+    double userSpeedConverted = double.parse(userSpeed.replaceAll(" km/h", ""));
     switch (_selectedSpeed) {
-      case "Mp/H":
-        return "${userSpeedConverted / 1.6093446} mp/h";
+      case "Mp/h":
+        userSpeedConverted = userSpeedConverted / 1.6093446;
+        return "${(userSpeedConverted.toStringAsFixed(2))} mp/h";
       case "M/s":
-        return "${userSpeedConverted / 3.6} m/s";
+        userSpeedConverted = userSpeedConverted / 3.6;
+        return "${userSpeedConverted.toStringAsFixed(2)} m/s";
       default:
         return userSpeed;
     }
@@ -94,5 +104,20 @@ class UserData extends ChangeNotifier {
   clearHistory() {
     _searchHistory.clear();
     saveUserHistory();
+  }
+
+  isntFirstLogin() {
+    userPrefs.isFirstLogin(false);
+    loadUserData();
+  }
+
+  setCurrentLocation(bool useCurrentLocation) {
+    userPrefs.saveCurrentLocation(useCurrentLocation);
+    loadUserData();
+  }
+
+  setCustomCity(String cityName) {
+    userPrefs.saveCustomCity(cityName);
+    loadUserData();
   }
 }

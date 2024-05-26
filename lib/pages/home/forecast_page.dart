@@ -36,14 +36,16 @@ class ForecastPage extends StatelessWidget {
               children: [
                 forecastCard(
                     text1: "Max: ",
-                    text2: "${forecast["max"].toString()}ºC",
+                    text2: userData
+                        .getConvertedTemperature(forecast["max"].toString()),
                     width: 190,
                     fontsize: 20,
                     icon: Icons.arrow_upward_outlined,
                     iconColor: Colors.green),
                 forecastCard(
                     text1: "Min: ",
-                    text2: "${forecast["min"].toString()}ºC",
+                    text2: userData
+                        .getConvertedTemperature(forecast["min"].toString()),
                     width: 190,
                     fontsize: 20,
                     icon: Icons.arrow_downward,
