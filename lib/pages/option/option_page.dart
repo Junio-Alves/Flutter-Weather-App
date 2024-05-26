@@ -27,6 +27,10 @@ class _OptionPageState extends State<OptionPage> {
               context: context,
               route: AppRoutes.themePage),
           optionCard(
+              text: "Localização",
+              context: context,
+              route: AppRoutes.cityOptionPage),
+          optionCard(
               text: "Unidade de Temperatura",
               context: context,
               route: AppRoutes.temperatureUnit),

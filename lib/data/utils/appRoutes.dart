@@ -12,4 +12,5 @@ class AppRoutes {
   static const speedUnit = "/speed_unit";
   static const temperatureUnit = "/temperature_unit";
   static const themePage = "/theme_page";
+  static const cityOptionPage = "/city_option_page";
 }

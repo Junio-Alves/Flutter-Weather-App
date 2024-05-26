@@ -15,7 +15,7 @@ Widget cityBox(
         final weatherProvider =
             Provider.of<WeatherProvider>(context, listen: false);
         weatherProvider.changeWeather(searchHistory[index]);
-        Navigator.pop(context);
+        Navigator.pop(context, searchHistory[index].city);
       },
       child: Container(
         height: 120,

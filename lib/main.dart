@@ -10,6 +10,7 @@ import 'package:weather_app2/pages/home/app_drawer_page.dart';
 import 'package:weather_app2/pages/drawer/feedback_page.dart';
 import 'package:weather_app2/pages/home/forecast_page.dart';
 import 'package:weather_app2/pages/home_or_error.dart';
+import 'package:weather_app2/pages/option/city_option_page.dart';
 import 'package:weather_app2/pages/option/language_page.dart';
 import 'package:weather_app2/pages/option/option_page.dart';
 import 'package:weather_app2/pages/option/speed_unit.dart';
@@ -56,6 +57,7 @@ class MyApp extends StatelessWidget {
           AppRoutes.speedUnit: (context) => const SpeedUnitPage(),
           AppRoutes.temperatureUnit: (context) => const TemperatureUnitPage(),
           AppRoutes.themePage: (context) => const ThemePage(),
+          AppRoutes.cityOptionPage: (context) => const CityOptionPage(),
         },
       ),
     );

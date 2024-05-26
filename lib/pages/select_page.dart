@@ -59,7 +59,7 @@ class _SelectPageState extends State<SelectPage> {
                       .then((value) {
                     if (weather.userweather != null) {
                       userData.isntFirstLogin();
-                      userData.setCustomCity(weather.userweather!.city);
+                      userData.setCustomCity(value.toString());
                       userData.setCurrentLocation(false);
                       Navigator.pushReplacementNamed(context, AppRoutes.home);
                     }
