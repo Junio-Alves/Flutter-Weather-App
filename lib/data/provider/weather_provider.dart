@@ -7,7 +7,7 @@ import 'package:weather_app2/data/models/weather_model.dart';
 import "package:http/http.dart" as http;
 
 class WeatherProvider extends ChangeNotifier {
-  final position = GetGeoLocation();
+  final position = GeoLocation();
   WeatherModel? _localUserWeather;
   WeatherModel? _searchWeather;
   String error = '';

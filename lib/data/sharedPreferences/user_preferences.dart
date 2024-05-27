@@ -6,7 +6,6 @@ class UserPreferences {
   //salvar o local do usuário
   void saveUserLocal(WeatherModel userWeather) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    //converte o objeto WeatherModel em Map, logo após em json.
     final userWeatherJson = jsonEncode(userWeather.toMap());
     await prefs.setString("userPreferences", userWeatherJson);
   }
