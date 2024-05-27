@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:weather_app2/data/utils/appRoutes.dart';
 import 'package:weather_app2/pages/home/weather_page.dart';
 import 'package:weather_app2/pages/loading_page.dart';
+import 'package:weather_app2/pages/widgets/popUpError_widget.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -17,31 +18,48 @@ class _HomePageState extends State<HomePage> {
   bool _isLoading = true;
   @override
   void initState() {
+    _initialize();
+    super.initState();
+  }
+
+  _initialize() async {
     final weatherProvider =
         Provider.of<WeatherProvider>(context, listen: false);
-
     final userData = Provider.of<UserData>(context, listen: false);
-    userData.loadUserData().then((value) {
+    await userData.loadUserData();
+    try {
       if (userData.isFirstLogin) {
-        Navigator.pushReplacementNamed(context, AppRoutes.selectPage);
+        _navigateToSelectPage();
       } else if (userData.useCurrentLocation) {
-        weatherProvider.getLocalWeather().then((value) {
-          setState(() {
-            _isLoading = false;
-          });
-        });
+        await _getLocalWeather(weatherProvider: weatherProvider);
       } else {
-        weatherProvider
-            .searchWeather(cityname: userData.customCity)
-            .then((value) {
-          weatherProvider.changeWeather(weatherProvider.resultWeather!);
-          setState(() {
-            _isLoading = false;
-          });
-        });
+        await _getCustomWeather(
+            weatherProvider: weatherProvider, userData: userData);
       }
-    });
-    super.initState();
+    } catch (error) {
+      if (mounted) {
+        errorPopUpWidget(error.toString(), context);
+      }
+    } finally {
+      setState(() {
+        _isLoading = false;
+      });
+    }
+  }
+
+  _navigateToSelectPage() {
+    Navigator.pushReplacementNamed(context, AppRoutes.selectPage);
+  }
+
+  _getLocalWeather({required WeatherProvider weatherProvider}) async {
+    await weatherProvider.getLocalWeather();
+  }
+
+  _getCustomWeather(
+      {required WeatherProvider weatherProvider,
+      required UserData userData}) async {
+    await weatherProvider.searchWeather(cityname: userData.customCity);
+    weatherProvider.changeWeather(weatherProvider.resultWeather!);
   }
 
   @override

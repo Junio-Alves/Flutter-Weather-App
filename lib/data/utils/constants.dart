@@ -1,5 +1,5 @@
 class Constants {
-  static const apiKey = 'SUA-CHAVE';
+  static const apiKey = "SUA-CHAVE";
 
   static String api({required double lat, required double long}) {
     final apiLink =

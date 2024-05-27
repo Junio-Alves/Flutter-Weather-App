@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:weather_app2/data/provider/userData_provider.dart';
@@ -14,6 +16,7 @@ class SelectPage extends StatefulWidget {
 class _SelectPageState extends State<SelectPage> {
   @override
   Widget build(BuildContext context) {
+    log("selectPage");
     final userData = Provider.of<UserData>(context);
     final weather = Provider.of<WeatherProvider>(context);
     return Scaffold(

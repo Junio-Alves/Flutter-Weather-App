@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 class WeatherModel {
   bool isFavorite = false;
   String temp;
@@ -22,13 +24,14 @@ class WeatherModel {
   });
 
   factory WeatherModel.fromMap(Map<dynamic, dynamic> map) {
+    log("modelo: ${map.toString()}");
     return WeatherModel(
+      conditionSlug: map["condition_slug"],
       temp: map['temp'].toString(),
       date: map['date'],
       time: map['time'],
       description: map['description'].toString(),
       currently: map['currently'].toString(),
-      conditionSlug: map["condition slug"],
       city: map['city'].toString(),
       humidity: map['humidity'].toString(),
       forecast: map['forecast'],
@@ -45,7 +48,7 @@ class WeatherModel {
       'city': city,
       'humidity': humidity,
       'forecast': forecast,
-      'conditionSlug': conditionSlug,
+      'condition_slug': conditionSlug,
     };
   }
 }

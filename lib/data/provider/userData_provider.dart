@@ -20,9 +20,9 @@ class UserData extends ChangeNotifier {
   get customCity => _customCity;
   get useCurrentLocation => _useCurrentLocation;
 
-  Future<void> loadUserData() async {
+  loadUserData() async {
     _customCity = await userPrefs.loadCustomCity() ?? "";
-    _useCurrentLocation = await userPrefs.loadCurrentLocation() ?? true;
+    _useCurrentLocation = await userPrefs.loadCurrentLocation() ?? false;
     _isFirstLogin = await userPrefs.loadIsFirstLogin() ?? true;
     _searchHistory = await userPrefs.loadHistory();
     _favoriteCitys = await userPrefs.loadFavorites();

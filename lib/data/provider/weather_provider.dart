@@ -34,7 +34,7 @@ class WeatherProvider extends ChangeNotifier {
       log(result.body);
       if (result.statusCode == 200) {
         final body = jsonDecode(result.body);
-        _localUserWeather = WeatherModel.fromMap(body['results']);
+        _localUserWeather = WeatherModel.fromMap(body["results"]);
       } else {
         error = result.statusCode.toString();
         throw Exception("Erro na requisição: $error");
@@ -59,6 +59,7 @@ class WeatherProvider extends ChangeNotifier {
         final body = jsonDecode(result.body);
         if (body["by"] == "city_name") {
           _searchWeather = WeatherModel.fromMap(body["results"]);
+          return _searchWeather;
         } else if (body["by"] == "default") {
           error = "Cidade não encontrada";
         }
