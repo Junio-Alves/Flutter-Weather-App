@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 import 'package:flutter/foundation.dart';
 import 'package:weather_app2/data/utils/constants.dart';
 import '../controller/user_geolocator.dart';
@@ -30,6 +31,7 @@ class WeatherProvider extends ChangeNotifier {
           Constants.api(lat: position.lat, long: position.long),
         ),
       );
+      log(result.body);
       if (result.statusCode == 200) {
         final body = jsonDecode(result.body);
         _localUserWeather = WeatherModel.fromMap(body['results']);
@@ -52,6 +54,7 @@ class WeatherProvider extends ChangeNotifier {
         Uri.parse(
             "https://api.hgbrasil.com/weather?key=${Constants.apiKey}&city_name=$cityname"),
       );
+      log(result.body);
       if (result.statusCode == 200) {
         final body = jsonDecode(result.body);
         if (body["by"] == "city_name") {

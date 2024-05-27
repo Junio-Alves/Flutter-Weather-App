@@ -3,7 +3,6 @@ import 'package:provider/provider.dart';
 import 'package:weather_app2/data/provider/userData_provider.dart';
 import 'package:weather_app2/data/provider/weather_provider.dart';
 import 'package:weather_app2/data/utils/appRoutes.dart';
-import 'package:weather_app2/pages/widgets/popUpError_widget.dart';
 
 class CityOptionPage extends StatefulWidget {
   const CityOptionPage({super.key});
@@ -78,8 +77,11 @@ class _CityOptionPageState extends State<CityOptionPage> {
               setState(() {
                 userData.setCurrentLocation(value!);
                 if (userData.customCity != null) {
-                  weather.searchWeather(cityname: userData.customCity);
-                  weather.changeWeather(weather.resultWeather!);
+                  weather
+                      .searchWeather(cityname: userData.customCity)
+                      .then((value) {
+                    weather.changeWeather(weather.resultWeather!);
+                  });
                 }
               });
             },

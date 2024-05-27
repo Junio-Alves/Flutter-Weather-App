@@ -7,27 +7,31 @@ class WeatherModel {
   String currently;
   String city;
   String humidity;
+  String conditionSlug;
   List<dynamic> forecast;
-  WeatherModel(
-      {required this.temp,
-      required this.date,
-      required this.time,
-      required this.description,
-      required this.currently,
-      required this.city,
-      required this.humidity,
-      required this.forecast});
+  WeatherModel({
+    required this.temp,
+    required this.date,
+    required this.time,
+    required this.description,
+    required this.currently,
+    required this.city,
+    required this.humidity,
+    required this.forecast,
+    required this.conditionSlug,
+  });
 
   factory WeatherModel.fromMap(Map<dynamic, dynamic> map) {
     return WeatherModel(
       temp: map['temp'].toString(),
-      date: map['date'].toString(),
-      time: map['time'].toString(),
+      date: map['date'],
+      time: map['time'],
       description: map['description'].toString(),
       currently: map['currently'].toString(),
+      conditionSlug: map["condition slug"],
       city: map['city'].toString(),
       humidity: map['humidity'].toString(),
-      forecast: map["forecast"],
+      forecast: map['forecast'],
     );
   }
 
@@ -41,6 +45,7 @@ class WeatherModel {
       'city': city,
       'humidity': humidity,
       'forecast': forecast,
+      'conditionSlug': conditionSlug,
     };
   }
 }
