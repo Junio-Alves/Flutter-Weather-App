@@ -16,7 +16,7 @@ class WeatherIcon {
     if (icons.containsKey(weather)) {
       return icons[weather]!;
     } else {
-      return "assets/icons/unknown.png";
+      return "assets/icons/white/unknown.png";
     }
   }
 
@@ -36,7 +36,7 @@ class WeatherIcon {
     if (icons.containsKey(weather)) {
       return icons[weather]!;
     } else {
-      return "assets/icons/unknown.png";
+      return "assets/icons/black/unknown.png";
     }
   }
 }

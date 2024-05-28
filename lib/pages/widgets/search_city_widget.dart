@@ -79,7 +79,7 @@ Widget cityBox(
             Column(
               children: [
                 Image.asset(
-                  WeatherIcon.white(searchHistory[index].currently),
+                  WeatherIcon.white(searchHistory[index].conditionSlug),
                   height: 70,
                   width: 70,
                 ),

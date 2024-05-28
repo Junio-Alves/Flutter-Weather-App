@@ -158,7 +158,7 @@ class _SearchPageState extends State<SearchPage> {
                           Column(
                             children: [
                               Image.asset(
-                                WeatherIcon.white(weatherProvider
+                                WeatherIcon.black(weatherProvider
                                     .resultWeather!.conditionSlug),
                                 height: 100,
                                 width: 100,
