@@ -19,7 +19,7 @@ class LoadingPage extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Image.asset(
-                "assets/icons/solid-white/clear.png",
+                "assets/icons/white/clear_day.png",
                 scale: 1,
               ),
               const Text(

@@ -4,7 +4,7 @@ import 'package:weather_app2/data/provider/userData_provider.dart';
 import 'package:weather_app2/data/provider/weather_provider.dart';
 import 'package:weather_app2/data/utils/appRoutes.dart';
 import 'package:weather_app2/data/utils/background.dart';
-import 'package:weather_app2/data/utils/imageIcon.dart';
+import 'package:weather_app2/data/utils/weatherIcon.dart';
 import 'package:weather_app2/pages/widgets/draggable_widget.dart';
 import 'package:weather_app2/pages/widgets/text_shadow.dart';
 
@@ -131,7 +131,7 @@ class _WeatherPageState extends State<WeatherPage> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Image.asset(
-                                imageIcon(weather.currently),
+                                WeatherIcon.white(weather.conditionSlug),
                                 height: 50,
                                 width: 50,
                               ),

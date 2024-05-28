@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:weather_app2/data/provider/userData_provider.dart';
 import 'package:weather_app2/data/provider/weather_provider.dart';
-import 'package:weather_app2/data/utils/imageIcon.dart';
+import 'package:weather_app2/data/utils/weatherIcon.dart';
 import 'package:weather_app2/pages/widgets/popUpError_widget.dart';
 import 'package:weather_app2/pages/widgets/search_city_widget.dart';
 import 'package:weather_app2/pages/widgets/text_shadow.dart';
@@ -158,8 +158,8 @@ class _SearchPageState extends State<SearchPage> {
                           Column(
                             children: [
                               Image.asset(
-                                imageIcon(
-                                    weatherProvider.resultWeather!.currently),
+                                WeatherIcon.white(weatherProvider
+                                    .resultWeather!.conditionSlug),
                                 height: 100,
                                 width: 100,
                               ),

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:weather_app2/data/provider/userData_provider.dart';
-import 'package:weather_app2/data/utils/imageIcon.dart';
+import 'package:weather_app2/data/utils/weatherIcon.dart';
 
 class ForecastPage extends StatelessWidget {
   const ForecastPage({super.key});
@@ -25,7 +25,7 @@ class ForecastPage extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(20.0),
               child: Image.asset(
-                imageIcon(forecast["condition"]),
+                WeatherIcon.black(forecast["condition"]),
                 scale: 0.7,
                 height: 150,
                 width: 150,

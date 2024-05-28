@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:weather_app2/data/models/weather_model.dart';
 import 'package:weather_app2/data/provider/weather_provider.dart';
-import 'package:weather_app2/data/utils/imageIcon.dart';
+import 'package:weather_app2/data/utils/weatherIcon.dart';
 
 Widget cityBox(
     {required List<WeatherModel> searchHistory,
@@ -14,7 +14,7 @@ Widget cityBox(
       onTap: () {
         final weatherProvider =
             Provider.of<WeatherProvider>(context, listen: false);
-        weatherProvider.changeWeather(searchHistory[index]);
+        weatherProvider.changeWeather(newWeather: searchHistory[index]);
         Navigator.pop(context, searchHistory[index].city);
       },
       child: Container(
@@ -79,7 +79,7 @@ Widget cityBox(
             Column(
               children: [
                 Image.asset(
-                  imageIcon(searchHistory[index].currently),
+                  WeatherIcon.white(searchHistory[index].currently),
                   height: 70,
                   width: 70,
                 ),

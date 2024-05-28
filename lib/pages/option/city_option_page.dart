@@ -76,11 +76,11 @@ class _CityOptionPageState extends State<CityOptionPage> {
             onChanged: (bool? value) {
               setState(() {
                 userData.setCurrentLocation(value!);
-                if (userData.customCity != null) {
+                if (userData.customCity != null && userData.customCity != "") {
                   weather
                       .searchWeather(cityname: userData.customCity)
                       .then((value) {
-                    weather.changeWeather(weather.resultWeather!);
+                    weather.changeWeather(newWeather: weather.resultWeather!);
                   });
                 }
               });
@@ -110,7 +110,8 @@ class _CityOptionPageState extends State<CityOptionPage> {
                             setState(() {
                               userData.setCustomCity(value.toString());
                               weather.searchWeather(cityname: value.toString());
-                              weather.changeWeather(weather.resultWeather!);
+                              weather.changeWeather(
+                                  newWeather: weather.resultWeather!);
                             });
                           });
                         },

@@ -22,7 +22,7 @@ class _HomePageState extends State<HomePage> {
     super.initState();
   }
 
-  _initialize() async {
+  Future _initialize() async {
     final weatherProvider =
         Provider.of<WeatherProvider>(context, listen: false);
     final userData = Provider.of<UserData>(context, listen: false);
@@ -32,18 +32,20 @@ class _HomePageState extends State<HomePage> {
         _navigateToSelectPage();
       } else if (userData.useCurrentLocation) {
         await _getLocalWeather(weatherProvider: weatherProvider);
+        setState(() {
+          _isLoading = false;
+        });
       } else {
         await _getCustomWeather(
             weatherProvider: weatherProvider, userData: userData);
+        setState(() {
+          _isLoading = false;
+        });
       }
     } catch (error) {
       if (mounted) {
         errorPopUpWidget(error.toString(), context);
       }
-    } finally {
-      setState(() {
-        _isLoading = false;
-      });
     }
   }
 
@@ -58,8 +60,9 @@ class _HomePageState extends State<HomePage> {
   _getCustomWeather(
       {required WeatherProvider weatherProvider,
       required UserData userData}) async {
-    await weatherProvider.searchWeather(cityname: userData.customCity);
-    weatherProvider.changeWeather(weatherProvider.resultWeather!);
+    weatherProvider.changeWeather(
+        newWeather:
+            await weatherProvider.searchWeather(cityname: userData.customCity));
   }
 
   @override

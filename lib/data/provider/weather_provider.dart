@@ -17,7 +17,7 @@ class WeatherProvider extends ChangeNotifier {
   WeatherModel? get resultWeather => _searchWeather;
 
   //Altera o clima do usuário por um novo
-  changeWeather(WeatherModel newWeather) {
+  changeWeather({required WeatherModel newWeather}) {
     _localUserWeather = newWeather;
     notifyListeners();
   }
@@ -35,6 +35,7 @@ class WeatherProvider extends ChangeNotifier {
       if (result.statusCode == 200) {
         final body = jsonDecode(result.body);
         _localUserWeather = WeatherModel.fromMap(body["results"]);
+        return _localUserWeather;
       } else {
         error = result.statusCode.toString();
         throw Exception("Erro na requisição: $error");

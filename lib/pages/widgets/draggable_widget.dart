@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:weather_app2/data/models/weather_model.dart';
 import 'package:weather_app2/data/utils/appRoutes.dart';
-import 'package:weather_app2/data/utils/imageIcon.dart';
+import 'package:weather_app2/data/utils/weatherIcon.dart';
 
 class DraggableWidget extends StatefulWidget {
   final WeatherModel weather;
@@ -75,7 +75,7 @@ class _DraggableWidgetState extends State<DraggableWidget> {
                                             children: [
                                               Image.asset(
                                                 //ICONE(DIA OU NOITE)
-                                                imageIcon(
+                                                WeatherIcon.black(
                                                     weather.forecast[index]
                                                         ["condition"]),
                                                 height: 40,
