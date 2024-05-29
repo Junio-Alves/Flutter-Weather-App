@@ -104,7 +104,7 @@ class _WeatherPageState extends State<WeatherPage> {
                               fontWeight: FontWeight.bold,
                             ),
                             Icon(
-                              Icons.add_location_rounded,
+                              Icons.pin_drop_sharp,
                               color: Theme.of(context).secondaryHeaderColor,
                               weight: 50,
                             ),
@@ -122,36 +122,33 @@ class _WeatherPageState extends State<WeatherPage> {
                         ),
                       ],
                     ),
-                    Padding(
-                      padding: const EdgeInsets.only(),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Image.asset(
-                                WeatherIcon.white(weather.conditionSlug),
-                                height: 50,
-                                width: 50,
-                              ),
-                              textshadow(
-                                text: weather.description,
-                                fontsize: 20,
-                                color: Theme.of(context).secondaryHeaderColor,
-                                fontWeight: FontWeight.normal,
-                              ),
-                            ],
-                          ),
-                          textshadow(
-                            text:
-                                userData.getConvertedTemperature(weather.temp),
-                            fontsize: 40,
-                            color: Theme.of(context).secondaryHeaderColor,
-                            fontWeight: FontWeight.normal,
-                          ),
-                        ],
-                      ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Image.asset(
+                              WeatherIcon.white(weather.conditionSlug),
+                              height: 80,
+                              width: 80,
+                            ),
+                            textshadow(
+                              text: weather.description,
+                              fontsize: 20,
+                              color: Theme.of(context).secondaryHeaderColor,
+                              fontWeight: FontWeight.normal,
+                            ),
+                          ],
+                        ),
+                        textshadow(
+                          text: userData.getConvertedTemperature(weather.temp),
+                          fontsize: 40,
+                          color: Theme.of(context).secondaryHeaderColor,
+                          fontWeight: FontWeight.normal,
+                        ),
+                      ],
                     ),
                   ],
                 ),
