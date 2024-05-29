@@ -71,6 +71,7 @@ class _SearchPageState extends State<SearchPage> {
                         child: Form(
                           key: _formKey,
                           child: TextFormField(
+                            focusNode: _showHistory,
                             controller: _searchController,
                             validator: (value) {
                               if (value!.isEmpty || value == "") {
