@@ -1,16 +1,10 @@
-# weather_app2
+# Sobre o projeto
 
-A new Flutter project.
+My first complete application developed in Flutter. A calculator with a modern and intuitive interface, the application allows you to perform basic mathematical operations quickly and easily.
 
-## Getting Started
+## Layout
+![Mobile1](https://github.com/Junio-Alves/Flutter-Weather-App/blob/main/app%20images/1.jpg). ![Mobile2](https://github.com/Junio-Alves/Flutter-Calculator-App/blob/main/calculadora-thema%20(1).gif).
 
-This project is a starting point for a Flutter application.
+# Autor
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Fº Junio Alves
