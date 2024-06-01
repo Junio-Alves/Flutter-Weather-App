@@ -62,7 +62,8 @@ class WeatherProvider extends ChangeNotifier {
           _searchWeather = WeatherModel.fromMap(body["results"]);
           return _searchWeather;
         } else if (body["by"] == "default") {
-          error = "Cidade não encontrada";
+          error =
+              "A cidade digitada não foi localizada. Por favor, verifique a ortografia e tente novamente.";
         }
       } else {
         error = "Erro na requisição da API";

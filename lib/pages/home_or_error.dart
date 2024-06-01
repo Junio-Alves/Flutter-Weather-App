@@ -44,7 +44,9 @@ class _HomePageState extends State<HomePage> {
       }
     } catch (error) {
       if (mounted) {
-        errorPopUpWidget(error.toString(), context);
+        errorPopUpWidget(error.toString(), context, () {
+          Navigator.pop(context);
+        });
       }
     }
   }

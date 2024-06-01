@@ -79,7 +79,7 @@ class _SelectPageState extends State<SelectPage> {
       padding: const EdgeInsets.all(8.0),
       child: Container(
         height: 50,
-        width: MediaQuery.of(context).size.width * 0.60,
+        width: MediaQuery.of(context).size.width * 0.70,
         decoration:
             BoxDecoration(color: color, borderRadius: BorderRadius.circular(5)),
         child: InkWell(

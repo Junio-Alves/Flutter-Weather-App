@@ -31,7 +31,9 @@ class _SearchPageState extends State<SearchPage> {
         userData.saveUserHistory();
         _searchController.clear();
       } else {
-        errorPopUpWidget(weatherProvider.error, context);
+        errorPopUpWidget(weatherProvider.error, context, () {
+          Navigator.pop(context);
+        });
       }
     }
 

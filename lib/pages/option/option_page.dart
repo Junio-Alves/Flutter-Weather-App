@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:weather_app2/data/utils/appRoutes.dart';
@@ -98,7 +99,9 @@ optionCard(
                   padding: const EdgeInsets.only(top: 10, bottom: 10, left: 10),
                   child: Text(
                     text,
-                    style: const TextStyle(color: Colors.white, fontSize: 20),
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: MediaQuery.of(context).size.width * 0.045),
                   ),
                 ),
               ],

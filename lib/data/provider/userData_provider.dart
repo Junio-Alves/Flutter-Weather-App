@@ -8,7 +8,7 @@ class UserData extends ChangeNotifier {
   List<WeatherModel> _favoriteCitys = [];
   String? _selectedTemperature;
   String? _selectedSpeed;
-  bool? _isFirstLogin;
+  bool? _isFirstLogin = true;
   String? _customCity;
   bool? _useCurrentLocation;
 
